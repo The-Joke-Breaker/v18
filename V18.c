@@ -19,7 +19,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 0 + 5; // add for offset start
+	int sect = 0 + 2; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -378,6 +378,13 @@ void chooseSect() {
         	light = getColorReflected(S3); //Get colour from sensor
 					driveLine();
         }
+        driveSpeed =  -10;
+
+        syncTurn(0,50);
+        //while (getUSDistance(S1) > 3.5) {
+        //	light = getColorReflected(S3); //Get colour from sensor
+				//	driveLine();
+        //}
     resetMotorEncoder(motorR);
     resetMotorEncoder(motorL);
     resetMotorEncoder(motorG);
@@ -393,7 +400,7 @@ void chooseSect() {
         char cent = 1;
         dist = getUSDistance(S1);
 
-        int grabdist=3333;
+        int grabdist=4000;
 
         playTone(700, 20); 	//Sector detection tone
     	setMotorSyncEncoder(motorR, motorL, 0, 10, 0);
@@ -404,15 +411,31 @@ void chooseSect() {
     	moveMotorTarget(motorG, grabdist, 100);
     	waitUntilMotorStop(motorG);
 
-        while (getColorReflected(S3) > white - buff) {
-            setMotorSyncTime(motorL, motorR, 0, 500, -10);
-             }
-             driveSpeed =  StdDriveSpeed;
+    	sleep(500);
+    	playTone(1200, 20); 	//Sector detection tone
+    	sleep(500);
+
+			resetMotorEncoder(motorL);
+			resetMotorEncoder(motorR);
+    	setMotorSyncEncoder(motorL, motorR, 0, 250, driveSpeed);
+
+    	waitUntilMotorStop(motorL);
+    	//waitUntilMotorStop(motorR);
+
+    	sleep(500);
+    	playTone(1200, 20); 	//Sector detection tone
+      sleep(500);
+
+			while (getColorReflected(S3) > white - buff) {
+				setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
+			}
+			sleep(500);
+			playTone(1200, 20); 	//Sector detection tone
+			sleep(500);
+			driveSpeed =  StdDriveSpeed;
 
 
-      break;
-    case 4:
-	  waitUntilMotorStop(motorL);
+			waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       moveMotorTarget(motorG, -grabdist, -100);
       waitUntilMotorStop(motorG);
@@ -423,13 +446,19 @@ void chooseSect() {
       sleep(400);
       moveMotorTarget(motorG, grabdist, 100);
       waitUntilMotorStop(motorG);
-      turnOnPoint(300, 20); //180 grader 320=180
+      turnOnPoint(-320, -20); //180 grader 320=180
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       while (getColorReflected(S3) > white - buff) {
         //syncTurn(-20,10);
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
+
+        //Find grå Drej
       }
+
+      break;
+    case 4:
+
       break;
 
     case 5:
