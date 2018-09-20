@@ -447,7 +447,7 @@ void chooseSect() {
       break;
 
     case 5:
-
+			/*
       int ok = 0;
       while (ok == 0) {
         syncTurn(-40, 40);
@@ -460,7 +460,18 @@ void chooseSect() {
           int hej = 1;
         ok = 1;
         //  setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
-      }
+      }*/
+
+      syncTurn(-40, 40);
+      setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
+      while (getColorReflected(S3) > white - buff)
+        int hej = 1;
+      while (getColorReflected(S3) > grey - buff)
+        int hej = 1;
+      while (getColorReflected(S3) > white - buff)
+        int hej = 1;
+      ok = 1;
+
 
       break;
     case 6:
