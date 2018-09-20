@@ -351,17 +351,17 @@ void chooseSect() {
 
     case 3:
 
-    driveSpeed =  -5;
+    //driveSpeed =  -5;
 
     sleep(1000);
 
- turnOnPoint(-181, driveSpeed); //turn
+ turnOnPoint(-181, -5); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
  setMotorSyncEncoder(motorL, motorR, 0, 500, driveSpeed);
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
- turnOnPoint(322, -driveSpeed); //turn
+ turnOnPoint(322, 5); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
 
@@ -372,9 +372,9 @@ void chooseSect() {
         setMotorSyncEncoder(motorL, motorR, 0, 50, driveSpeed);
         }
         //setMotorSync(motorL, motorR, 0, driveSpeed);
-         sleep(1000);
+         //sleep(1000);
         //syncTurn(0,200);
-         sleep(1000);
+         //sleep(1000);
         while (getUSDistance(S1) > 4) {
         	light = getColorReflected(S3); //Get colour from sensor
 					driveLine();
