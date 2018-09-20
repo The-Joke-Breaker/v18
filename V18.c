@@ -30,7 +30,7 @@
 	//Circa light reflextion from board
 	int white = 80;
 	int grey 	=	56;
-	const int black = 20;
+	const int black = 25;
 
 	//Used to make a buffer between the mesured light
 	int buff = 10;
@@ -436,7 +436,7 @@ void chooseSect() {
       break;
     case 6:
 
-			syncTurn(-40, 40);
+			syncTurn(-40, 100);
 			//moveMotorEncoder(motorL, motorR, -20, 10, driveSpeed);
 			while (getColorReflected(S3) > white - buff)
 				syncTurn(0, 10);
