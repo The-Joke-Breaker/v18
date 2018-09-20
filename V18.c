@@ -355,18 +355,17 @@ void chooseSect() {
     sleep(1000);
 
 
- turnOnPoint(181, 5); //turn
+ turnOnPoint(150, 5); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
 
  sleep(1000);
-
+        driveSpeed =  -20;
  //syncTurn(20,200); //If manual turning is needed use this.
  while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
         while (getUSDistance(S1) > 10) {
-        driveSpeed =  -40;
         oldSect = sect;		//Prevention of repeat sector actions
 		light = getColorReflected(S3); //Get colour from sensor
 		test_light++;		//Debug: Counting coloursensor usage
