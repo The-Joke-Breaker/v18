@@ -19,7 +19,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 0; // add for offset start
+	int sect = 0 + 2; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -275,6 +275,8 @@ int afstand = getUSDistance(S1);
 
   displayBigTextLine(1, "Sect: %i", sect);
   displayBigTextLine(3, "Lys: %i", getColorReflected(S3));
+  displayBigTextLine(5, "Gray: %i", grey);
+  displayBigTextLine(7, "White: %i", white);
   //displayBigTextLine(3, "Ultralyd: %i", afstand );
   //displayBigTextLine(5, "Stadig i løkken %i", tra );
   /*##Calibrering af line k?rsel
@@ -295,39 +297,63 @@ void chooseSect() {
 
      	syncTurn(-20, 200);
 
-      while (getColorReflected(S3) > white - buff) {
+     	sleep(1000);
+
+      /*while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
-      }
+      }*/
+
+      do {
+      	printDis();
+      	setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
+      	waitUntilMotorStop(motorL);
+      	waitUntilMotorStop(motorR);
+      } while (getColorReflected(S3) > white - buff);
+
+      printDis();
+      sleep(1000);
+
+
+
       //waitUntilMotorStop(motorL);
  			//waitUntilMotorStop(motorR);
 
- 			while(1){}
- 			syncTurn(-20, 200);
+ 			//while(1){}
+ 			syncTurn(20, 180);
+ 			printDis();
+
+ 			sleep(1000);
 
     	break;
 
     case 2:
 
-     //turnOnRight(100);
-   	 turnOnPoint(50,-5);
-      while (getColorReflected(S3) > white - buff) {
-        //syncTurn(20,10);
-        setMotorSyncEncoder(motorL, motorR, 20, 10, driveSpeed);
-      }
-      while (getColorReflected(S3) > grey - buff) {
-        //syncTurn(-20,10);
-      	setMotorSyncEncoder(motorL, motorR, 0, 100, driveSpeed);
-      }
-      waitUntilMotorStop(motorL);
- 			waitUntilMotorStop(motorR);
+    	sleep(1000);
 
-    	turnOnPoint(50, 5);
+    	printDis();
+    	syncTurn(20, 200);
+
+    	sleep(1000);
+
+    	do {
+    		printDis();
+      	setMotorSyncEncoder(motorL, motorR, 20, -10, driveSpeed);
+      	waitUntilMotorStop(motorL);
+      	waitUntilMotorStop(motorR);
+      } while (getColorReflected(S3) > white - buff);
+
+      sleep(1000);
+      printDis();
+      syncTurn(-30, 200);
+
+    	sleep(1000);
+
       break;
 
     case 3:
 
  //syncTurn(20,200); //If manual turning is needed use this.
- turnOnPoint(50,-5);
+ turnOnPoint(50, 5);
  while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
@@ -355,7 +381,7 @@ void chooseSect() {
         char cent = 1;
         dist = getUSDistance(S1);
 
-        int grabdist=3333
+        int grabdist=3333;
 
         playTone(700, 20); 	//Sector detection tone
     	setMotorSyncEncoder(motorR, motorL, 0, 10, 0);
