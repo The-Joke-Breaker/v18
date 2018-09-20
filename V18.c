@@ -354,10 +354,10 @@ void chooseSect() {
 
     sleep(1000);
 
- turnOnPoint(-181, 5); //turn
+ turnOnPoint(-181, -5); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
- setMotorSyncEncoder(motorL, motorR, 0, 100, driveSpeed);
+ setMotorSyncEncoder(motorL, motorR, 0, 500, driveSpeed);
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
  turnOnPoint(322, 5); //turn
