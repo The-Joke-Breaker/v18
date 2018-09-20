@@ -16,10 +16,10 @@
 
 //##Location
 	//Used to keep track of if mindstorm, black==1, grey==2, white==3,
-	int whereU = 0;
+	int whereU = 0 + 5;
 
 	//Used to track which section the mindstorm is in
-	int sect = 0 + 2; // add for offset start
+	int sect = 0; // add for offset start
 	int oldSect = 0;
 //###############################################
 
