@@ -370,7 +370,7 @@ void chooseSect() {
  while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
-        while (getUSDistance(S1) > 10) {
+        while (getUSDistance(S1) > 3) {
         oldSect = sect;		//Prevention of repeat sector actions
 		light = getColorReflected(S3); //Get colour from sensor
 		test_light++;		//Debug: Counting coloursensor usage
