@@ -295,33 +295,39 @@ void chooseSect() {
 
      	syncTurn(-20, 200);
 
-      while (getColorReflected(S3) > white - buff) {
+      /*while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
-      }
+      }*/
+
+      do {
+      	setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
+      	waitUntilMotorStop(motorL);
+      	waitUntilMotorStop(motorR);
+      } while (getColorReflected(S3) > white - buff);
+
+
       //waitUntilMotorStop(motorL);
  			//waitUntilMotorStop(motorR);
 
- 			while(1){}
- 			syncTurn(-20, 200);
+ 			//while(1){}
+ 			syncTurn(20, 180);
 
     	break;
 
     case 2:
 
-     //turnOnRight(100);
-   	 turnOnPoint(50,-5);
-      while (getColorReflected(S3) > white - buff) {
-        //syncTurn(20,10);
-        setMotorSyncEncoder(motorL, motorR, 20, 10, driveSpeed);
-      }
-      while (getColorReflected(S3) > grey - buff) {
-        //syncTurn(-20,10);
-      	setMotorSyncEncoder(motorL, motorR, 0, 100, driveSpeed);
-      }
-      waitUntilMotorStop(motorL);
- 			waitUntilMotorStop(motorR);
+    	syncTurn(20, 200);
 
-    	turnOnPoint(50, 5);
+    	do {
+      	setMotorSyncEncoder(motorL, motorR, 20, -10, driveSpeed);
+      	waitUntilMotorStop(motorL);
+      	waitUntilMotorStop(motorR);
+      } while (getColorReflected(S3) > white - buff);
+
+      syncTurn(-20, 180);
+
+
+
       break;
 
     case 3:
@@ -355,7 +361,7 @@ void chooseSect() {
         char cent = 1;
         dist = getUSDistance(S1);
 
-        int grabdist=3333
+        int grabdist=3333;
 
         playTone(700, 20); 	//Sector detection tone
     	setMotorSyncEncoder(motorR, motorL, 0, 10, 0);
