@@ -352,8 +352,9 @@ void chooseSect() {
 
     case 3:
 
- //syncTurn(20,200); //If manual turning is needed use this.
+
  turnOnPoint(50, 5);
+ syncTurn(20,200); //If manual turning is needed use this.
  while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
