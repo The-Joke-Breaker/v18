@@ -346,8 +346,8 @@ void chooseSect() {
     int timeval1 = time1[T1];
     int timeval2 = time1[T1];
     while (timeval2-timeval1 < 2000 ) {
-	timeval2 = time1[T1];
 	setMotorSyncTime(motorR, motorL, 0, 10, -5);
+	timeval2 = time1[T1];
   }
         float dist;
         float oldDist;
