@@ -298,8 +298,8 @@ void chooseSect() {
       while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
       }
-      waitUntilMotorStop(motorL);
- 			waitUntilMotorStop(motorR);
+      //waitUntilMotorStop(motorL);
+ 			//waitUntilMotorStop(motorR);
 
  			while(1){}
  			syncTurn(-20, 200);
@@ -327,47 +327,76 @@ void chooseSect() {
     case 3:
 
  //syncTurn(20,200); //If manual turning is needed use this.
-      while (getUSDistance(S1) > 10) {
-      	driveSpeed =  -40;
-      }
-      float dist;
-      float oldDist;
-      float probeDist;
-      char cent = 1;
-      dist = getUSDistance(S1);
-
-      while (dist > 4) {
-      	oldDist = dist;
+ turnOnPoint(50,-5);
+ while (getColorReflected(S3) > white - buff) {
+        setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
+        }
+        while (getUSDistance(S1) > 10) {
+        driveSpeed =  -40;
+        oldSect = sect;		//Prevention of repeat sector actions
+		light = getColorReflected(S3); //Get colour from sensor
+		test_light++;		//Debug: Counting coloursensor usage
+		whereIsIt();		//Determine colour
+		chooseSect();		//Choose sector
+		printDis();			//Debug: display
+        }
+    resetMotorEncoder(motorR);
+    resetMotorEncoder(motorL);
+    resetMotorEncoder(motorG);
+    int timeval1 = time1[T1];
+    int timeval2 = time1[T1];
+    while (timeval2-timeval1 < 2000 ) {
+	timeval2 = time1[T1];
+	setMotorSyncTime(motorR, motorL, 0, 10, -5);
+  }
+        float dist;
+        float oldDist;
+        float probeDist;
+        char cent = 1;
         dist = getUSDistance(S1);
-        driveSpeed =  -20;
-        //setMotorSyncTime(motorL, motorR, 0, 300, -15);
-        //waitUntilMotorStop(motorL);
-        //waitUntilMotorStop(motorR);
-        //}
-      }
-      while (dist > 2.2) {
-      	driveSpeed =  10/(5.0-dist);
-      	//setMotorSyncTime(motorL, motorR, 0, 500, -10/(5.0-dist));
-      }
 
-      moveMotorTarget(motorG, 2000, 100);
+        int grabdist=3333
 
-      while (getColorReflected(S3) > white - buff) {
-      	setMotorSyncTime(motorL, motorR, 0, 500, -10);
-      }
-      driveSpeed =  StdDriveSpeed;
+        playTone(700, 20); 	//Sector detection tone
+    	setMotorSyncEncoder(motorR, motorL, 0, 10, 0);
+    	playTone(1200, 20); 	//Sector detection tone
+        resetMotorEncoder(motorR);
+        resetMotorEncoder(motorL);
+        resetMotorEncoder(motorG);
+    	setMotorTarget(motorG, grabdist, 100);
 
-    	break;
+       /* while (dist > 4) {
+        oldDist = dist;
+            dist = getUSDistance(S1);
+            driveSpeed =  -20;
+            //setMotorSyncTime(motorL, motorR, 0, 300, -15);
+            //waitUntilMotorStop(motorL);
+            //waitUntilMotorStop(motorR);
+            //}
+        }
+        while (dist > 2.2) {
+            driveSpeed =  10/(5.0-dist);
+            //setMotorSyncTime(motorL, motorR, 0, 500, -10/(5.0-dist));
+            }
+            moveMotorTarget(motorG, 2000, 100);*/
+
+        while (getColorReflected(S3) > white - buff) {
+            setMotorSyncTime(motorL, motorR, 0, 500, -10);
+             }
+             driveSpeed =  StdDriveSpeed;
+
+
+      break;
     case 4:
 
-      moveMotorTarget(motorG, -2000, -100);
+      moveMotorTarget(motorG, -grabdist, -100);
       waitUntilMotorStop(motorG);
       sleep(100);
       turnOnPoint(20, 20); //180 grader
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       sleep(400);
-      moveMotorTarget(motorG, 2000, 100);
+      moveMotorTarget(motorG, grabdist, 100);
       waitUntilMotorStop(motorG);
       turnOnPoint(300, 20); //180 grader 320=180
       waitUntilMotorStop(motorL);
