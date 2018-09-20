@@ -19,7 +19,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 0 + 2; // add for offset start
+	int sect = 0; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -52,7 +52,7 @@
 	const float Kd =        0.0005;		//Movement smoothness
 
 	//Ki Default
-	const float KiDef = 0.0010;			//Tendency to go towards the grey line
+	const float KiDef = 0.0006;			//Tendency to go towards the grey line
 	float Ki = KiDef;
 //###############################################
 
@@ -372,9 +372,8 @@ void chooseSect() {
         setMotorSyncEncoder(motorL, motorR, 0, 50, driveSpeed);
         }
         //setMotorSync(motorL, motorR, 0, driveSpeed);
-         //sleep(1000);
-        //syncTurn(0,200);
-         //sleep(1000);
+        syncTurn(0,200);
+        integral = 0;
         while (getUSDistance(S1) > 4) {
         	light = getColorReflected(S3); //Get colour from sensor
 					driveLine();
