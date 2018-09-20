@@ -401,7 +401,7 @@ void chooseSect() {
         resetMotorEncoder(motorR);
         resetMotorEncoder(motorL);
         resetMotorEncoder(motorG);
-    	setMotorTarget(motorG, grabdist, 100);
+    	setMotorTarget(motorG, grabdist, -100);
 
        /* while (dist > 4) {
         oldDist = dist;
