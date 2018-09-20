@@ -16,7 +16,7 @@
 
 //##Location
 	//Used to keep track of if mindstorm, black==1, grey==2, white==3,
-	int whereU = 0 + 5;
+	int whereU = 0 + 2;
 
 	//Used to track which section the mindstorm is in
 	int sect = 0; // add for offset start
@@ -353,8 +353,8 @@ void chooseSect() {
     case 3:
 
 
- turnOnPoint(50, 5); //turn
- syncTurn(20,200); //If manual turning is needed use this.
+ turnOnPoint(181, 5); //turn
+ //syncTurn(20,200); //If manual turning is needed use this.
  while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
