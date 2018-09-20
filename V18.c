@@ -19,7 +19,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 0 + 2; // add for offset start
+	int sect = 0 + 4; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -223,7 +223,6 @@ void whereIsIt() {
     playTone(440, 20); 	//Sector detection tone
       motor[motorR] = driveSpeed;
       motor[motorL] = driveSpeed;
-      displayBigTextLine(3, "round: %i", sect);
       whereU = 1;
       hej = 0;
     }
@@ -463,14 +462,13 @@ void chooseSect() {
       }*/
 
       syncTurn(-40, 40);
-      setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
+      moveMotorEncoder(motorL, motorR, -20, 10, driveSpeed);
       while (getColorReflected(S3) > white - buff)
         int hej = 1;
       while (getColorReflected(S3) > grey - buff)
         int hej = 1;
       while (getColorReflected(S3) > white - buff)
         int hej = 1;
-      ok = 1;
 
 
       break;
