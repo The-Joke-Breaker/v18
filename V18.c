@@ -401,7 +401,7 @@ void chooseSect() {
         resetMotorEncoder(motorR);
         resetMotorEncoder(motorL);
         resetMotorEncoder(motorG);
-    	setMotorTarget(motorG, grabdist, 100);
+    	moveMotorTarget(motorG, grabdist, 100);
     	waitUntilMotorStop(motorG);
 
        /* while (dist > 4) {
