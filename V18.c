@@ -412,7 +412,8 @@ void chooseSect() {
 
       break;
     case 4:
-
+	  waitUntilMotorStop(motorL);
+      waitUntilMotorStop(motorR);
       moveMotorTarget(motorG, -grabdist, -100);
       waitUntilMotorStop(motorG);
       sleep(100);
