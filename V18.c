@@ -351,15 +351,17 @@ void chooseSect() {
 
     case 3:
 
+    driveSpeed =  -5;
+
     sleep(1000);
 
- turnOnPoint(-181, -5); //turn
+ turnOnPoint(-181, driveSpeed); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
  setMotorSyncEncoder(motorL, motorR, 0, 500, driveSpeed);
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
- turnOnPoint(322, 5); //turn
+ turnOnPoint(322, -driveSpeed); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
 
@@ -367,15 +369,15 @@ void chooseSect() {
         driveSpeed =  -20;
  //syncTurn(20,200); //If manual turning is needed use this.
  while (getColorReflected(S3) > white - buff) {
-        setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
+        setMotorSyncEncoder(motorL, motorR, 0, 50, driveSpeed);
         }
-        while (getUSDistance(S1) > 3) {
-        oldSect = sect;		//Prevention of repeat sector actions
-		light = getColorReflected(S3); //Get colour from sensor
-		test_light++;		//Debug: Counting coloursensor usage
-		whereIsIt();		//Determine colour
-		chooseSect();		//Choose sector
-		printDis();			//Debug: display
+        //setMotorSync(motorL, motorR, 0, driveSpeed);
+         sleep(1000);
+        //syncTurn(0,200);
+         sleep(1000);
+        while (getUSDistance(S1) > 4) {
+        	light = getColorReflected(S3); //Get colour from sensor
+					driveLine();
         }
     resetMotorEncoder(motorR);
     resetMotorEncoder(motorL);
@@ -402,21 +404,6 @@ void chooseSect() {
         resetMotorEncoder(motorG);
     	moveMotorTarget(motorG, grabdist, 100);
     	waitUntilMotorStop(motorG);
-
-       /* while (dist > 4) {
-        oldDist = dist;
-            dist = getUSDistance(S1);
-            driveSpeed =  -20;
-            //setMotorSyncTime(motorL, motorR, 0, 300, -15);
-            //waitUntilMotorStop(motorL);
-            //waitUntilMotorStop(motorR);
-            //}
-        }
-        while (dist > 2.2) {
-            driveSpeed =  10/(5.0-dist);
-            //setMotorSyncTime(motorL, motorR, 0, 500, -10/(5.0-dist));
-            }
-            moveMotorTarget(motorG, 2000, 100);*/
 
         while (getColorReflected(S3) > white - buff) {
             setMotorSyncTime(motorL, motorR, 0, 500, -10);
@@ -449,21 +436,6 @@ void chooseSect() {
 
       break;
     case 6:
-
-    				/*
-			int ok = 0;
-			while (ok == 0) {
-			  syncTurn(-40, 40);
-			  setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
-			  while (getColorReflected(S3) > white - buff)
-			    int hej = 1;
-			  while (getColorReflected(S3) > grey - buff)
-			    int hej = 1;
-			  while (getColorReflected(S3) > white - buff)
-			    int hej = 1;
-			  ok = 1;
-			  //  setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
-			}*/
 
 			syncTurn(-40, 40);
 			//moveMotorEncoder(motorL, motorR, -20, 10, driveSpeed);
