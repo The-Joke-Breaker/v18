@@ -355,7 +355,7 @@ void chooseSect() {
     sleep(1000);
 
 
- turnOnPoint(150, 5); //turn
+ turnOnPoint(125, 5); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
 
@@ -378,10 +378,10 @@ void chooseSect() {
     resetMotorEncoder(motorG);
     int timeval1 = time1[T1];
     int timeval2 = time1[T1];
-    while (timeval2-timeval1 < 2000 ) {
+    /*while (timeval2-timeval1 < 2000 ) {
 	setMotorSyncTime(motorR, motorL, 0, 10, -5);
 	timeval2 = time1[T1];
-  }
+  }*/
         float dist;
         float oldDist;
         float probeDist;
