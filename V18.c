@@ -395,8 +395,6 @@ void chooseSect() {
 	timeval2 = time1[T1];
   }*/
         float dist;
-        float oldDist;
-        float probeDist;
         char cent = 1;
         dist = getUSDistance(S1);
 
@@ -459,7 +457,7 @@ void chooseSect() {
         //Find grå Drej
         turnOnPoint(90, 5); //turn
         integral = 0;//glem tidligere korrektion for at forhindre overreaktion.
-      }
+
 
       break;
     case 4:
@@ -531,8 +529,8 @@ void chooseSect() {
     default:
 
       break;
+}
 
-    }
   }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
