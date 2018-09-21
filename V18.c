@@ -450,10 +450,12 @@ void chooseSect() {
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       while (getColorReflected(S3) > white - buff) {
-        //syncTurn(-20,10);
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
+        }
 
         //Find grå Drej
+        turnOnPoint(181, 5); //turn
+        integral = 0;//glem tidligere korrektion for at forhindre overreaktion.
       }
 
       break;
