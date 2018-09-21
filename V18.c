@@ -450,6 +450,9 @@ void chooseSect() {
       turnOnPoint(-320, -10); //180 grader 320=180
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
+      syncTurn(0,50);
+      waitUntilMotorStop(motorL);
+      waitUntilMotorStop(motorR);
       while (getColorReflected(S3) > white - buff) {
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
