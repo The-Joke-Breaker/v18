@@ -453,7 +453,10 @@ void chooseSect() {
       syncTurn(0,50);
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
-      while (getColorReflected(S3) > white - buff) {
+      int notWhite = 0
+      while (notWhite<20) {
+		if(getColorReflected(S3) > white - buff){notWhite++}
+		else{notWhite=0}
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
 
