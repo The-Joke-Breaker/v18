@@ -9,7 +9,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //##Test variables
-	int hej = 0; // test
+	int sortcounter = 0; // test
 	int test_light = 0;
 	int  tra = 0;
 //###############################################
@@ -209,22 +209,22 @@ void whereIsIt() {
     //grey area
     driveLine();
     whereU = 2;
-    hej = 0;
+    sortcounter = 0;
   } else if (light > white - buff) {
     //White area
     driveLine();
     whereU = 3;
-    hej = 0;
+    sortcounter = 0;
   } else if (light < black + buff && whereU != 1) {
     //Black area
-    hej++;
-    if (hej >= 50) {
+    sortcounter++;
+    if (sortcounter >= 50) {
       sect++;
     playTone(440, 20); 	//Sector detection tone
       motor[motorR] = driveSpeed;
       motor[motorL] = driveSpeed;
       whereU = 1;
-      hej = 0;
+      sortcounter = 0;
     }
   } else {
     driveLine();
