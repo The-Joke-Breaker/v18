@@ -440,13 +440,16 @@ void chooseSect() {
       moveMotorTarget(motorG, -grabdist, -100);
       waitUntilMotorStop(motorG);
       sleep(100);
-      turnOnPoint(20, 20); //180 grader
+      turnOnPoint(20, 10); //180 grader
+      waitUntilMotorStop(motorL);
+      waitUntilMotorStop(motorR);
+      turnOnPoint(-20, -10); //180 grader
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       sleep(400);
       moveMotorTarget(motorG, grabdist, 100);
       waitUntilMotorStop(motorG);
-      turnOnPoint(-320, -20); //180 grader 320=180
+      turnOnPoint(-320, -10); //180 grader 320=180
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       while (getColorReflected(S3) > white - buff) {
@@ -454,7 +457,7 @@ void chooseSect() {
         }
 
         //Find grå Drej
-        turnOnPoint(181, 5); //turn
+        turnOnPoint(90, 5); //turn
         integral = 0;//glem tidligere korrektion for at forhindre overreaktion.
       }
 
