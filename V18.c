@@ -20,7 +20,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 2; // add for offset start
+	int sect = 5; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -357,6 +357,7 @@ void chooseSect() {
 
     sleep(1000);
 turnOnPoint(200, 5); //turn
+integral =0;
  while (getColorReflected(S3) > white - buff) {
         turnOnPoint(-10, -5);
         }
@@ -493,6 +494,10 @@ turnOnPoint(200, 5); //turn
 
         printDis();			//Debug: display
           int ok = 0;
+      moveMotorTarget(motorR,400,-30);
+			moveMotorTarget(motorL,400,-30);
+			waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
       while (ok == 0) {
         syncTurn(40, 120);
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
