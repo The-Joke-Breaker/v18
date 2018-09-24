@@ -612,7 +612,7 @@ integral =0;
 
 
       break;
-    case 11: // Det modsatte af case 9
+    case 11: // Det modsatte af case 9 hej
 	turnOnPoint(80, -20);
 			moveMotorTarget(motorR,800,-20);
 			moveMotorTarget(motorL,800,-20);
