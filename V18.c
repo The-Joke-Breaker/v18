@@ -20,7 +20,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 9; // add for offset start
+	int sect = 0; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -352,7 +352,7 @@ void chooseSect() {
       break;
 
     case 3:
-
+/*
     //driveSpeed =  -5;
 
     sleep(1000);
@@ -370,7 +370,7 @@ integral =0;
  turnOnPoint(322, 5); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);*/
-
+/*
  sleep(1000);
         driveSpeed =  -20;
  //syncTurn(20,200); //If manual turning is needed use this.
@@ -400,6 +400,8 @@ integral =0;
 	setMotorSyncTime(motorR, motorL, 0, 10, -5);
 	timeval2 = time1[T1];
   }*/
+
+  /*
         float dist;
         char cent = 1;
         dist = getUSDistance(S1);
@@ -477,13 +479,15 @@ integral =0;
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
 */
-        //Find grå Drej
+    /*    //Find grå Drej
         turnOnPoint(110, 5); //turn
         integral = 0;//glem tidligere korrektion for at forhindre overreaktion.
-
+*/
 
       break;
     case 4:
+
+    sect++;
 
       break;
 
@@ -537,6 +541,8 @@ integral =0;
       break;
     case 7:
 
+    sect++;
+
       break;
     case 8:
 
@@ -570,13 +576,37 @@ integral =0;
       break;
     case 10:
 
+    //moveMotorTarget(motorD, 2000, 100);
+
     	resetMotorEncoder(motorL);
       resetMotorEncoder(motorR);
 
-    	setMotorSyncEncoder(motorL, motorR, 0, 800, driveSpeed);
+    	setMotorSyncEncoder(motorL, motorR, 0, 750, -20);
+
+    	waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
+
+    	turnOnPoint(80, -20);
 
 
-    	while(1){}
+
+			while (getUSDistance(S1) > 7) {
+				motor[motorL]=-20;
+				motor[motorR]=-20;
+			}
+
+			motor[motorL]=0;
+			motor[motorR]=0;
+
+			syncTurn(-70, 210);
+
+			resetMotorEncoder(motorL);
+      resetMotorEncoder(motorR);
+
+    	setMotorSyncEncoder(motorL, motorR, 0, 800, -20);
+
+    	waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
 
 
 
