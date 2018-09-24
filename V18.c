@@ -494,27 +494,27 @@ integral =0;
 
         printDis();			//Debug: display
           int ok = 0;
-      moveMotorTarget(motorR,400,-30);
+      moveMotorTarget(motorR,400,-30); // Kører lidt frem så vi er væk fra den sorte streg.
 			moveMotorTarget(motorL,400,-30);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
       while (ok == 0) {
 
-      turnOnPoint(25,-5);
-      while (getColorReflected(S3) < white - buff)
+      turnOnPoint(25,-5); // Drejer så vi er sikker på at den ikke er på det hvide
+      while (getColorReflected(S3) < white - buff) // Drejer stille og rolig mens den er på det grå, indtil den er på det hvide.
       {
         turnOnPoint(10,-5);
       }
 
-        while (getColorReflected(S3) > white - buff)
+        while (getColorReflected(S3) > white - buff)  // Mens den er på det hvide kører den ligeud
         {
         	playTone(240, 20);
-        	whileloop = 1;
+        	whileloop = 1; // Brugt til test
           printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
 				}
 				delay(100);
-        while (getColorReflected(S3) < grey + buff)
+        while (getColorReflected(S3) < grey + buff) // Mens den er på det grå kører den ligeud.
         {
         	playTone(900, 20);
         	whileloop = 2;
@@ -522,7 +522,7 @@ integral =0;
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
 				}
 				delay(100);
-        while (getColorReflected(S3) > white - buff)
+        while (getColorReflected(S3) > white - buff) // Men den er på det grå kører den ligeud.
         {
         	playTone(240, 20);
         	whileloop = 3;
@@ -531,22 +531,9 @@ integral =0;
 				}
         ok = 1;
         whileloop = 0;
-        //  setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
 
   }
 
-
-
-/*
-			syncTurn(40, 100);
-			//moveMotorEncoder(motorL, motorR, -20, 10, driveSpeed);
-			while (getColorReflected(S3) > white - buff)
-				syncTurn(0, 20);
-			while (getColorReflected(S3) > grey - buff)
-				syncTurn(0, 20);
-			while (getColorReflected(S3) > white - buff)
-				syncTurn(0, 20);
-*/
       break;
     case 7:
 
@@ -555,29 +542,31 @@ integral =0;
 
       break;
     case 9:
-	turnOnPoint(-80, 20);
-			moveMotorTarget(motorR,700,-20);
+	turnOnPoint(-80, 20); // Drejer til højre
+			moveMotorTarget(motorR,700,-20); // kører ligeud så vi er lidt væk fra flasken
 			moveMotorTarget(motorL,700,-20);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
-			turnOnPoint(-100,-20);
+			turnOnPoint(-100,-20); // Drejer tilbage mod stregen
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
-			while(getColorReflected(S3) > (white - buff)){
+			while(getColorReflected(S3) > (white - buff)){ // Mens den er på det hvide kører den ligeud
 				setMotorSpeed(motorL,-20);
 				setMotorSpeed(motorR,-20);
 			}
 			setMotorSpeed(motorL,0);
 			setMotorSpeed(motorR,0);
 
-			integral = 0;
+			integral = 0; // Sætter noget i PID til 0, så den ikke reagere så kraftigt.
 			delay(100);
-			  while (getColorReflected(S3) < grey + buff)
+			  while (getColorReflected(S3) < grey + buff) // Mens den er på det grå kører den ligeud.
         {
 				setMotorSpeed(motorL,-20);
 				setMotorSpeed(motorR,-20);
 				}
-							syncTurn(-50, 200);
+							syncTurn(-50, 200); // Drejer tilbage mod stregen.
+
+							// TILFØJE SAMME METODE SOM I CASE 11.
       break;
     case 10:
 
@@ -593,7 +582,7 @@ integral =0;
 
 
       break;
-    case 11:
+    case 11: // Det modsatte af case 9
 	turnOnPoint(80, -20);
 			moveMotorTarget(motorR,800,-20);
 			moveMotorTarget(motorL,800,-20);
