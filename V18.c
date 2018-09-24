@@ -223,7 +223,7 @@ void whereIsIt() {
     sortcounter++;
     if (sortcounter >= 20) {
       sect++;
-    playTone(440, 20); 	//Sector detection tone
+    	playTone(440, 20); 	//Sector detection tone
       motor[motorR] = driveSpeed;
       motor[motorL] = driveSpeed;
       whereU = 1;
@@ -498,44 +498,44 @@ integral =0;
       break;
     case 6:
 
-        printDis();			//Debug: display
-          int ok = 0;
-      moveMotorTarget(motorR,400,-30); // K�rer lidt frem s� vi er v�k fra den sorte streg.
-			moveMotorTarget(motorL,400,-30);
-			waitUntilMotorStop(motorR);
-			waitUntilMotorStop(motorL);
-      while (ok == 0) {
+		printDis();			//Debug: display
+		int ok = 0;
+		moveMotorTarget(motorR,400,-30); // K�rer lidt frem s� vi er v�k fra den sorte streg.
+		moveMotorTarget(motorL,400,-30);
+		waitUntilMotorStop(motorR);
+		waitUntilMotorStop(motorL);
+		while (ok == 0) {
 
-      turnOnPoint(25,-5); // Drejer s� vi er sikker p� at den ikke er p� det hvide
-      while (getColorReflected(S3) < white - buff) // Drejer stille og rolig mens den er p� det gr�, indtil den er p� det hvide.
-      {
-        turnOnPoint(10,-5);
-      }
+			turnOnPoint(25,-5); // Drejer s� vi er sikker p� at den ikke er p� det hvide
+			while (getColorReflected(S3) < white - buff) // Drejer stille og rolig mens den er p� det gr�, indtil den er p� det hvide.
+			{
+				turnOnPoint(10,-5);
+			}
 
-        while (getColorReflected(S3) > white - buff)  // Mens den er p� det hvide k�rer den ligeud
-        {
-        	whileloop = 1; // Brugt til test
-          printDis();			//Debug: display
-					setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-				}
-				delay(100);
-        while (getColorReflected(S3) < grey + buff) // Mens den er p� det gr� k�rer den ligeud.
-        {
-        	whileloop = 2;
-          printDis();			//Debug: display
-					setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-				}
-				delay(100);
-        while (getColorReflected(S3) > white - buff) // Men den er p� det gr� k�rer den ligeud.
-        {
-        	whileloop = 3;
-        	printDis();			//Debug: display
-					setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-				}
-        ok = 1;
-        whileloop = 0;
+			while (getColorReflected(S3) > white - buff)  // Mens den er p� det hvide k�rer den ligeud
+			{
+				whileloop = 1; // Brugt til test
+				printDis();			//Debug: display
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+			}
+			delay(100);
+			while (getColorReflected(S3) < grey + buff) // Mens den er p� det gr� k�rer den ligeud.
+			{
+				whileloop = 2;
+				printDis();			//Debug: display
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+			}
+			delay(100);
+			while (getColorReflected(S3) > white - buff) // Men den er p� det gr� k�rer den ligeud.
+			{
+				whileloop = 3;
+				printDis();			//Debug: display
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+			}
+			ok = 1;
+			whileloop = 0;
 
-  }
+  		}		
 
       break;
     case 7:
@@ -557,7 +557,7 @@ integral =0;
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 			while(getColorReflected(S3) > (white - buff)){ // Mens den er p� det hvide k�rer den ligeud
-							setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 	//			setMotorSpeed(motorL,driveSlow);
 	//			setMotorSpeed(motorR,driveSlow);
 			}
@@ -566,24 +566,24 @@ integral =0;
 
 			integral = 0; // S�tter noget i PID til 0, s� den ikke reagere s� kraftigt.
 			delay(100);
-			  while (getColorReflected(S3) < grey + buff)
-        {
-        				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-		//		setMotorSpeed(motorL,driveSlow);
-		//		setMotorSpeed(motorR,driveSlow);
-				}
-				delay(100);
-					setMotorSyncEncoder(motorB, motorC, 0, 150, driveSlow);
+			while (getColorReflected(S3) < grey + buff)
+			{
+							setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+	//		setMotorSpeed(motorL,driveSlow);
+	//		setMotorSpeed(motorR,driveSlow);
+			}
+			delay(100);
+			setMotorSyncEncoder(motorB, motorC, 0, 150, driveSlow);
 	//		moveMotorTarget(motorR,150,driveSlow);
 	//		moveMotorTarget(motorL,150,driveSlow);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
-				while (getColorReflected(S3) > white - buff)
-				{
-					turnOnPoint(10, -driveSlow);
-				}
+			while (getColorReflected(S3) > white - buff)
+			{
 				turnOnPoint(10, -driveSlow);
-				turnOnPoint(10, -driveSlow);
+			}
+			turnOnPoint(10, -driveSlow);
+			turnOnPoint(10, -driveSlow);
       break;
     case 10:
 
@@ -601,7 +601,7 @@ integral =0;
 
 
 			while (getUSDistance(S1) > 7) {
-			setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 			}
 
 			motor[motorL]=0;
@@ -622,8 +622,8 @@ integral =0;
 
       break;
     case 11: // Det modsatte af case 9 hej
-	turnOnPoint(80, driveSlow);
-				setMotorSyncEncoder(motorB, motorC, 0, 800, driveSlow);
+			turnOnPoint(80, driveSlow);
+			setMotorSyncEncoder(motorB, motorC, 0, 800, driveSlow);
 	//		moveMotorTarget(motorR,800,driveSlow);
 	//		moveMotorTarget(motorL,800,driveSlow);
 			waitUntilMotorStop(motorR);
@@ -632,7 +632,7 @@ integral =0;
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 			while(getColorReflected(S3) > (white - buff)){
-						setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 	//			setMotorSpeed(motorL,driveSlow);
 	//			setMotorSpeed(motorR,driveSlow);
 			}
@@ -643,24 +643,24 @@ integral =0;
 			delay(100);
 			  while (getColorReflected(S3) < grey + buff)
         {
-       			setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+					setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 //				setMotorSpeed(motorL,driveSlow);
 //				setMotorSpeed(motorR,driveSlow);
 				}
-				delay(100);
-						setMotorSyncEncoder(motorB, motorC, 0, 150, driveSlow);
+			delay(100);
+			setMotorSyncEncoder(motorB, motorC, 0, 150, driveSlow);
 		//	moveMotorTarget(motorR,150,driveSlow);
 		//	moveMotorTarget(motorL,150,driveSlow);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
-				while (getColorReflected(S3) > white - buff)
-				{
-					turnOnPoint(10, driveSlow);
-				}
+			while (getColorReflected(S3) > white - buff)
+			{
+				turnOnPoint(10, driveSlow);
+			}
 
       break;
     case 12:
-		
+
 	    clearTimer(T1);
 			while (getUSDistance(S1) > 10 ) {
 
