@@ -20,7 +20,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 5; // add for offset start
+	int sect = 10; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -499,24 +499,38 @@ integral =0;
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
       while (ok == 0) {
-        syncTurn(40, 120);
-					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+
+      turnOnPoint(25,-5);
+      while (getColorReflected(S3) < white - buff)
+      {
+        turnOnPoint(10,-5);
+      }
+
         while (getColorReflected(S3) > white - buff)
-        	playTone(440, 20);
+        {
+        	playTone(240, 20);
         	whileloop = 1;
           printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
-        while (getColorReflected(S3) > grey - buff)
-        	playTone(440, 20);
+				}
+				delay(100);
+        while (getColorReflected(S3) < grey + buff)
+        {
+        	playTone(900, 20);
         	whileloop = 2;
           printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+				}
+				delay(100);
         while (getColorReflected(S3) > white - buff)
-        	playTone(440, 20);
+        {
+        	playTone(240, 20);
         	whileloop = 3;
         	printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+				}
         ok = 1;
+        whileloop = 0;
         //  setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
 
   }
@@ -541,12 +555,66 @@ integral =0;
 
       break;
     case 9:
+	turnOnPoint(-80, 20);
+			moveMotorTarget(motorR,700,-20);
+			moveMotorTarget(motorL,700,-20);
+			waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
+			turnOnPoint(-100,-20);
+			waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
+			while(getColorReflected(S3) > (white - buff)){
+				setMotorSpeed(motorL,-20);
+				setMotorSpeed(motorR,-20);
+			}
+			setMotorSpeed(motorL,0);
+			setMotorSpeed(motorR,0);
 
+			integral = 0;
+			delay(100);
+			  while (getColorReflected(S3) < grey + buff)
+        {
+				setMotorSpeed(motorL,-20);
+				setMotorSpeed(motorR,-20);
+				}
+							syncTurn(-50, 200);
       break;
     case 10:
 
+
       break;
     case 11:
+	turnOnPoint(80, -20);
+			moveMotorTarget(motorR,800,-20);
+			moveMotorTarget(motorL,800,-20);
+			waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
+			turnOnPoint(100,20);
+			waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
+			while(getColorReflected(S3) > (white - buff)){
+				setMotorSpeed(motorL,-30);
+				setMotorSpeed(motorR,-30);
+			}
+			setMotorSpeed(motorL,0);
+			setMotorSpeed(motorR,0);
+
+			integral = 0;
+			delay(100);
+			  while (getColorReflected(S3) < grey + buff)
+        {
+				setMotorSpeed(motorL,-30);
+				setMotorSpeed(motorR,-30);
+				}
+				delay(100);
+			moveMotorTarget(motorR,150,-20);
+			moveMotorTarget(motorL,150,-20);
+			waitUntilMotorStop(motorR);
+			waitUntilMotorStop(motorL);
+				while (getColorReflected(S3) > white - buff)
+				{
+					turnOnPoint(10, -20);
+				}
 
       break;
     case 12:
