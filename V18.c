@@ -38,10 +38,10 @@
 //###############################################
 
 //##Speed
-	const int StdDriveSpeed =  -60; //Inverse standard drive speed.
+	const int StdDriveSpeed =  -40; //Inverse standard drive speed.
     int driveSpeed =  StdDriveSpeed; //Inverse standard drive speed.
 
-    int driveSlow = -30; //Slow drive speed
+    int driveSlow = -25; //Slow drive speed
 	//Max and min speed
 	int speedMax = 100;
 	int speedMin = -100;
@@ -281,7 +281,7 @@ int afstand = getUSDistance(S1);
   displayBigTextLine(7, "White: %i", white);
   displayBigTextLine(9, "Loop: %i", whileloop);
   //displayBigTextLine(3, "Ultralyd: %i", afstand );
-  //displayBigTextLine(5, "Stadig i løkken %i", tra );
+  //displayBigTextLine(5, "Stadig i lï¿½kken %i", tra );
   /*##Calibrering af line k?rsel
   displayBigTextLine(1, "correction: %i", correction);
   displayBigTextLine(3, "e:%f", e);
@@ -481,7 +481,7 @@ integral =0;
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
 */
-    /*    //Find grå Drej
+    /*    //Find grï¿½ Drej
         turnOnPoint(110, 5); //turn
         integral = 0;//glem tidligere korrektion for at forhindre overreaktion.
 */
@@ -500,33 +500,33 @@ integral =0;
 
         printDis();			//Debug: display
           int ok = 0;
-      moveMotorTarget(motorR,400,-30); // Kører lidt frem så vi er væk fra den sorte streg.
+      moveMotorTarget(motorR,400,-30); // Kï¿½rer lidt frem sï¿½ vi er vï¿½k fra den sorte streg.
 			moveMotorTarget(motorL,400,-30);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
       while (ok == 0) {
 
-      turnOnPoint(25,-5); // Drejer så vi er sikker på at den ikke er på det hvide
-      while (getColorReflected(S3) < white - buff) // Drejer stille og rolig mens den er på det grå, indtil den er på det hvide.
+      turnOnPoint(25,-5); // Drejer sï¿½ vi er sikker pï¿½ at den ikke er pï¿½ det hvide
+      while (getColorReflected(S3) < white - buff) // Drejer stille og rolig mens den er pï¿½ det grï¿½, indtil den er pï¿½ det hvide.
       {
         turnOnPoint(10,-5);
       }
 
-        while (getColorReflected(S3) > white - buff)  // Mens den er på det hvide kører den ligeud
+        while (getColorReflected(S3) > white - buff)  // Mens den er pï¿½ det hvide kï¿½rer den ligeud
         {
         	whileloop = 1; // Brugt til test
           printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 				}
 				delay(100);
-        while (getColorReflected(S3) < grey + buff) // Mens den er på det grå kører den ligeud.
+        while (getColorReflected(S3) < grey + buff) // Mens den er pï¿½ det grï¿½ kï¿½rer den ligeud.
         {
         	whileloop = 2;
           printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 				}
 				delay(100);
-        while (getColorReflected(S3) > white - buff) // Men den er på det grå kører den ligeud.
+        while (getColorReflected(S3) > white - buff) // Men den er pï¿½ det grï¿½ kï¿½rer den ligeud.
         {
         	whileloop = 3;
         	printDis();			//Debug: display
@@ -547,16 +547,16 @@ integral =0;
 
       break;
     case 9:
-	turnOnPoint(-80, -driveSlow); // Drejer til højre
+	turnOnPoint(-80, -driveSlow); // Drejer til hï¿½jre
 			setMotorSyncEncoder(motorB, motorC, 0, 700, driveSlow);
-//			moveMotorTarget(motorR,700,driveSlow); // kører ligeud så vi er lidt væk fra flasken
+//			moveMotorTarget(motorR,700,driveSlow); // kï¿½rer ligeud sï¿½ vi er lidt vï¿½k fra flasken
 	//		moveMotorTarget(motorL,700,driveSlow);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 			turnOnPoint(-100,driveSlow); // Drejer tilbage mod stregen
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
-			while(getColorReflected(S3) > (white - buff)){ // Mens den er på det hvide kører den ligeud
+			while(getColorReflected(S3) > (white - buff)){ // Mens den er pï¿½ det hvide kï¿½rer den ligeud
 							setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 	//			setMotorSpeed(motorL,driveSlow);
 	//			setMotorSpeed(motorR,driveSlow);
@@ -564,7 +564,7 @@ integral =0;
 			setMotorSpeed(motorL,0);
 			setMotorSpeed(motorR,0);
 
-			integral = 0; // Sætter noget i PID til 0, så den ikke reagere så kraftigt.
+			integral = 0; // Sï¿½tter noget i PID til 0, sï¿½ den ikke reagere sï¿½ kraftigt.
 			delay(100);
 			  while (getColorReflected(S3) < grey + buff)
         {
