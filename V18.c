@@ -660,9 +660,7 @@ integral =0;
 
       break;
     case 12:
-
-      break;
-    case 13:
+		
 	    clearTimer(T1);
 			while (getUSDistance(S1) > 10 ) {
 
