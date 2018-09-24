@@ -429,9 +429,9 @@ void chooseSect() {
 			while (getColorReflected(S3) > white - buff) {
 				setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
 			}
-			sleep(500);
+	//		sleep(500);
 			playTone(1200, 20); 	//Sector detection tone
-			sleep(500);
+	//		sleep(500);
 			driveSpeed =  StdDriveSpeed;
 
 
@@ -446,30 +446,35 @@ void chooseSect() {
       turnOnPoint(-20, -10); //180 grader
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
-      sleep(400);
+      sleep(100);
       moveMotorTarget(motorG, grabdist, 100);
       waitUntilMotorStop(motorG);
-      turnOnPoint(-320, -10); //180 grader 320=180
-      waitUntilMotorStop(motorL);
-      waitUntilMotorStop(motorR);
-      syncTurn(0,50);
+      turnOnPoint(-250, -10); //180 grader 320=180
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       int notWhite = 0;
+    clearTimer(T1);
+
+      while (time1[T1] < 4000)
+      {
+    	setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+    	}
+    	/*
       while (notWhite<5) {
-		if(getColorReflected(S3) > white - buff)
+		if((getColorReflected(S3) > grey - buff && (getColorReflected(S3) < white - buff))
 			{
 			notWhite++;
 			}
 		else
 			{
+			setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
 			notWhite=0;
 			}
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
-
+*/
         //Find grå Drej
-        turnOnPoint(90, 5); //turn
+        turnOnPoint(110, 5); //turn
         integral = 0;//glem tidligere korrektion for at forhindre overreaktion.
 
 
