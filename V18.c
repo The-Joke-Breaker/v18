@@ -356,8 +356,11 @@ void chooseSect() {
     //driveSpeed =  -5;
 
     sleep(1000);
-
- turnOnPoint(-181, -5); //turn
+turnOnPoint(200, 5); //turn
+ while (getColorReflected(S3) > white - buff) {
+        turnOnPoint(-10, -5);
+        }
+ /*turnOnPoint(-181, -5); //turn
  waitUntilMotorStop(motorL);
  waitUntilMotorStop(motorR);
  setMotorSyncEncoder(motorL, motorR, 0, 500, driveSpeed);
@@ -365,7 +368,7 @@ void chooseSect() {
  waitUntilMotorStop(motorR);
  turnOnPoint(322, 5); //turn
  waitUntilMotorStop(motorL);
- waitUntilMotorStop(motorR);
+ waitUntilMotorStop(motorR);*/
 
  sleep(1000);
         driveSpeed =  -20;
