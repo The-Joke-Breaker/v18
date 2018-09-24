@@ -12,6 +12,7 @@
 	int sortcounter = 0; // test
 	int test_light = 0;
 	int  tra = 0;
+	int whileloop = 0;
 //###############################################
 
 //##Location
@@ -19,7 +20,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 0 + 2; // add for offset start
+	int sect = 2; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -218,7 +219,7 @@ void whereIsIt() {
   } else if (light < black + buff && whereU != 1) {
     //Black area
     sortcounter++;
-    if (sortcounter >= 50) {
+    if (sortcounter >= 20) {
       sect++;
     playTone(440, 20); 	//Sector detection tone
       motor[motorR] = driveSpeed;
@@ -276,6 +277,7 @@ int afstand = getUSDistance(S1);
   displayBigTextLine(3, "Lys: %i", getColorReflected(S3));
   displayBigTextLine(5, "Gray: %i", grey);
   displayBigTextLine(7, "White: %i", white);
+  displayBigTextLine(9, "Loop: %i", whileloop);
   //displayBigTextLine(3, "Ultralyd: %i", afstand );
   //displayBigTextLine(5, "Stadig i løkken %i", tra );
   /*##Calibrering af line k?rsel
@@ -453,10 +455,16 @@ void chooseSect() {
       syncTurn(0,50);
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
-      int notWhite = 0
-      while (notWhite<20) {
-		if(getColorReflected(S3) > white - buff){notWhite++}
-		else{notWhite=0}
+      int notWhite = 0;
+      while (notWhite<5) {
+		if(getColorReflected(S3) > white - buff)
+			{
+			notWhite++;
+			}
+		else
+			{
+			notWhite=0;
+			}
         setMotorSyncEncoder(motorL, motorR, 0, 10, driveSpeed);
         }
 
@@ -475,6 +483,31 @@ void chooseSect() {
       break;
     case 6:
 
+        printDis();			//Debug: display
+          int ok = 0;
+      while (ok == 0) {
+        syncTurn(40, 120);
+					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+        while (getColorReflected(S3) > white - buff)
+        	whileloop = 1;
+          printDis();			//Debug: display
+					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+        while (getColorReflected(S3) > grey - buff)
+        	whileloop = 2;
+          printDis();			//Debug: display
+					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+        while (getColorReflected(S3) > white - buff)
+        	whileloop = 3;
+        	printDis();			//Debug: display
+					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
+        ok = 1;
+        //  setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
+
+  }
+
+
+
+/*
 			syncTurn(40, 100);
 			//moveMotorEncoder(motorL, motorR, -20, 10, driveSpeed);
 			while (getColorReflected(S3) > white - buff)
@@ -483,7 +516,7 @@ void chooseSect() {
 				syncTurn(0, 20);
 			while (getColorReflected(S3) > white - buff)
 				syncTurn(0, 20);
-
+*/
       break;
     case 7:
 
@@ -517,7 +550,7 @@ void chooseSect() {
 			}
 
 			while (getUSDistance(S1) > 3) {
-				setMotorSyncEncoder(motorB, motorC, 0, 10, -5);
+					setMotorSyncEncoder(motorB, motorC, 0, 10, -5);
 
 			}
 			playTone(700, 20); 	//Sector detection tone
@@ -546,7 +579,6 @@ void reference() {
   //	sleep(200);
   grey = getColorReflected(S3);
   while (getColorReflected(S3) < grey + buff) {
-
     turnOnPoint(20, -10);
 
   }
