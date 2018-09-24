@@ -502,14 +502,17 @@ integral =0;
         syncTurn(40, 120);
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
         while (getColorReflected(S3) > white - buff)
+        	playTone(440, 20);
         	whileloop = 1;
           printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
         while (getColorReflected(S3) > grey - buff)
+        	playTone(440, 20);
         	whileloop = 2;
           printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
         while (getColorReflected(S3) > white - buff)
+        	playTone(440, 20);
         	whileloop = 3;
         	printDis();			//Debug: display
 					setMotorSyncEncoder(motorB, motorC, 0, 0, -20);
