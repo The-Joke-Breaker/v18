@@ -20,7 +20,7 @@
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 10; // add for offset start
+	int sect = 9; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -580,6 +580,16 @@ integral =0;
 							syncTurn(-50, 200);
       break;
     case 10:
+
+    	resetMotorEncoder(motorL);
+      resetMotorEncoder(motorR);
+
+    	setMotorSyncEncoder(motorL, motorR, 0, 800, driveSpeed);
+
+
+    	while(1){}
+
+
 
 
       break;
