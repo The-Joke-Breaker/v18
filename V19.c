@@ -23,7 +23,7 @@ int grabdist=4000;
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 2; // add for offset start
+	int sect = 6; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -461,12 +461,12 @@ turnOnPoint(200, 5); //turn
       sleep(100);
       moveMotorTarget(motorG, grabdist, 100);
       waitUntilMotorStop(motorG);
-      //gammel kode (Virkede ofte, følsom for vægt og friktionsændring)
+      //gammel kode (Virkede ofte, fï¿½lsom for vï¿½gt og friktionsï¿½ndring)
       /*turnOnPoint(-100, -10); //180 grader 320=180
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);*/
       //gammel slut
-      //test for at forbedre pålidelighed
+      //test for at forbedre pï¿½lidelighed
       turnOnPoint(-100, -10); //180 grader 320=180
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
