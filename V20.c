@@ -25,7 +25,7 @@ int grabdist=4000;
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 11; // add for offset start
+	int sect = 5; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -549,7 +549,7 @@ void chooseSect() {
     case 8:
     			driveSpeed = StdDriveSpeed;
 			turnOnPoint(10, -10);
-    	setMotorSyncTime(motorB, motorC, 0, 3150, driveSlow);
+    	setMotorSyncTime(motorB, motorC, 0, 2800, driveSlow);
     	waitUntilMotorStop(motorL);
     	waitUntilMotorStop(motorR);
      moveMotorTarget(motorG, -grabdist, -100);
@@ -585,13 +585,11 @@ void chooseSect() {
         }
 
         driveSpeed = StdDriveSpeed;
-
+   	    grabBottle(1);
       break;
     case 9:
 	turnOnPoint(-80, -driveSlow); // Drejer til h�jre
 			setMotorSyncEncoder(motorB, motorC, 0, 700, driveSlow);
-//			moveMotorTarget(motorR,700,driveSlow); // k�rer ligeud s� vi er lidt v�k fra flasken
-	//		moveMotorTarget(motorL,700,driveSlow);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 			turnOnPoint(-100,driveSlow); // Drejer tilbage mod stregen
@@ -599,8 +597,6 @@ void chooseSect() {
 			waitUntilMotorStop(motorL);
 			while(getColorReflected(S3) > (white - buff)){ // Mens den er p� det hvide k�rer den ligeud
 				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-	//			setMotorSpeed(motorL,driveSlow);
-	//			setMotorSpeed(motorR,driveSlow);
 			}
 			setMotorSpeed(motorL,0);
 			setMotorSpeed(motorR,0);
@@ -610,13 +606,9 @@ void chooseSect() {
 			while (getColorReflected(S3) < grey + buff)
 			{
 							setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-	//		setMotorSpeed(motorL,driveSlow);
-	//		setMotorSpeed(motorR,driveSlow);
 			}
 			delay(100);
 			setMotorSyncEncoder(motorB, motorC, 0, 150, driveSlow);
-	//		moveMotorTarget(motorR,150,driveSlow);
-	//		moveMotorTarget(motorL,150,driveSlow);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 			while (getColorReflected(S3) > white - buff)
@@ -684,11 +676,9 @@ void chooseSect() {
           turnOnPoint(10, 5);
 
       break;
-    case 11: // Det modsatte af case 9 hej
+    case 11: // Det modsatte af case 9
 			turnOnPoint(80, driveSlow);
 			setMotorSyncEncoder(motorB, motorC, 0, 800, driveSlow);
-	//		moveMotorTarget(motorR,800,driveSlow);
-	//		moveMotorTarget(motorL,800,driveSlow);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 			turnOnPoint(100,-driveSlow);
@@ -696,8 +686,6 @@ void chooseSect() {
 			waitUntilMotorStop(motorL);
 			while(getColorReflected(S3) > (white - buff)){
 				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-	//			setMotorSpeed(motorL,driveSlow);
-	//			setMotorSpeed(motorR,driveSlow);
 			}
 			setMotorSpeed(motorL,0);
 			setMotorSpeed(motorR,0);
@@ -707,13 +695,9 @@ void chooseSect() {
 			  while (getColorReflected(S3) < grey + buff)
         {
 					setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
-//				setMotorSpeed(motorL,driveSlow);
-//				setMotorSpeed(motorR,driveSlow);
 				}
 			delay(100);
 			setMotorSyncEncoder(motorB, motorC, 0, 150, driveSlow);
-		//	moveMotorTarget(motorR,150,driveSlow);
-		//	moveMotorTarget(motorL,150,driveSlow);
 			waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 			while (getColorReflected(S3) > white - buff)
@@ -737,14 +721,13 @@ driveSpeed =StdDriveSpeed;
 				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 			}
 			turnOnPoint(30, -driveSlow);
-			//turnOnPoint(10, -driveSlow);
 
 
+			clearTimer(T1);
 
-			while (getUSDistance(S1) > 130 ) {
+			while (getUSDistance(S1) > 150 || time1[T1] < 5000) {
 			  light = getColorReflected(S3); //Get colour from sensor
 			  driveLine();
-				//setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 			}
 
 
