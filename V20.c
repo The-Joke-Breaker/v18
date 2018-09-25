@@ -25,7 +25,7 @@ int grabdist=4000;
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 6; // add for offset start
+	int sect = 2; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -281,9 +281,9 @@ void syncTurn(int motorRatio, int deg) {
 }
 
 //Function to grap or let bottle go
-//x = 1 grabs bottle; 
+//x = 1 grabs bottle;
 //x = 2 lets go of bottle
-void grabBottle(int x;){
+void grabBottle(int x){
 	switch(x){
 		case 1:
 			moveMotorTarget(motorG, grabdist, 100);
@@ -298,7 +298,7 @@ void grabBottle(int x;){
 		default:
 
 		break;
-	}		
+	}
 
 }
 
@@ -396,7 +396,7 @@ void chooseSect() {
 			turnOnPoint(10, -driveSlow);
 		}
 		sleep(100);
-		while (getColorReflected(S3) < gray + buff)
+		while (getColorReflected(S3) < grey + buff)
 		{
 			turnOnPoint(10, -driveSlow);
 		}
@@ -430,7 +430,7 @@ void chooseSect() {
 
 		//Turn counterclock wise 100 degrees
 		turnOnPoint(100, driveSlow);
-		
+
 		//Turn counterclock wise until tuching gray
 		while(getColorReflected(S3) > white - buff){
 			motor[motorL]=-driveSlow;
@@ -450,7 +450,7 @@ void chooseSect() {
 		sleep(100);
 
 		//Drives forward until white
-		while(getColorReflected(S3) < gray + buff){
+		while(getColorReflected(S3) < grey + buff){
 			motor[motorL]=driveSlow;
 			motor[motorR]=driveSlow;
 		}
@@ -460,7 +460,7 @@ void chooseSect() {
 		setMotorSyncEncoder(motorL, motorR, 0, 50, -driveSlow);
 
 
-		while(getColorReflected(S3) < gray + buff){
+		while(getColorReflected(S3) < grey + buff){
 			motor[motorL]=driveSlow;
 			motor[motorR]=-driveSlow;
 		}
