@@ -389,6 +389,8 @@ void chooseSect() {
 
 		//Drives a bit forward after the black line
 		setMotorSyncEncoder(motorL, motorR, 0, 180, driveSlow);
+		waitUntilMotorStop(motorL);
+
 
 		//Turns clockwise until over both white and black
 		while (getColorReflected(S3) > white - buff)
@@ -412,6 +414,7 @@ void chooseSect() {
 		//Passes blue dot
 		resetMotorEncoder(motorL);
 		setMotorSyncEncoder(motorL, motorR, 0, 100, driveSlow);
+		waitUntilMotorStop(motorL);
 
 		//Drive forward until black line
 		while(getColorReflected(S3) > white - buff){
