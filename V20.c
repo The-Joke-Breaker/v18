@@ -453,7 +453,7 @@ turnOnPoint(180, 5); //turn
     }
     delay(100);
 
-			while (getColorReflected(S3) < grey + buff) // Mens den er på det grå kører den ligeud.
+			while (getColorReflected(S3) < grey + buff) // Mens den er pï¿½ det grï¿½ kï¿½rer den ligeud.
 			{
 				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 		}
