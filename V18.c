@@ -354,12 +354,11 @@ void chooseSect() {
       break;
 
     case 3:
-/*
+
     //driveSpeed =  -5;
 
     sleep(1000);
 turnOnPoint(200, 5); //turn
-integral =0;
  while (getColorReflected(S3) > white - buff) {
         turnOnPoint(-10, -5);
         }
@@ -381,6 +380,8 @@ integral =0;
         }
         //setMotorSync(motorL, motorR, 0, driveSpeed);
         syncTurn(0,200);
+        */
+        driveSpeed =  -20;
         integral = 0;
         while (getUSDistance(S1) > 4) {
         	light = getColorReflected(S3); //Get colour from sensor
