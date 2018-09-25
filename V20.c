@@ -25,7 +25,7 @@ int grabdist=4000;
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 2; // add for offset start
+	int sect = 11; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -386,7 +386,7 @@ void chooseSect() {
       break;
 
     case 3:
-
+/*
 		resetMotorEncoder(motorL);
 
 		//Drives a bit forward after the black line
@@ -468,6 +468,7 @@ void chooseSect() {
 		}
 		motor[motorL]=0;
 		motor[motorR]=0;
+*/
 
       break;
     case 4:
@@ -542,12 +543,13 @@ void chooseSect() {
 			}
 			turnOnPoint(10, driveSlow);
 
-			driveSpeed = -10;
+			driveSpeed = -15;
 
       break;
     case 8:
+    			driveSpeed = StdDriveSpeed;
 			turnOnPoint(10, -10);
-    	setMotorSyncTime(motorB, motorC, 0, 3150, -20);
+    	setMotorSyncTime(motorB, motorC, 0, 3150, driveSlow);
     	waitUntilMotorStop(motorL);
     	waitUntilMotorStop(motorR);
      moveMotorTarget(motorG, -grabdist, -100);
@@ -555,14 +557,16 @@ void chooseSect() {
       sleep(100);
     	while (getColorReflected(S3) > black + buff)
       {
-    	setMotorSyncEncoder(motorB, motorC, 0, 0, 20);
+    	setMotorSyncEncoder(motorB, motorC, 0, 0, -driveSlow);
     	}
-    	turnOnPoint(-270, -5);
+    	turnOnPoint(-200, -5);
     	while (getColorReflected(S3) > white - buff) {
         turnOnPoint(-10, -5);
         }
 
-       	while (whitesensor < 20)
+        driveSpeed = -20;
+
+       	while (whitesensor < 650 && getColorReflected(S3) > black)
        {
 			  oldSect = sect;		//Prevention of repeat sector actions
 			  light = getColorReflected(S3); //Get colour from sensor
@@ -579,6 +583,9 @@ void chooseSect() {
 		    	while (getColorReflected(S3) > white - buff) {
         turnOnPoint(-10, -5);
         }
+
+        driveSpeed = StdDriveSpeed;
+
       break;
     case 9:
 	turnOnPoint(-80, -driveSlow); // Drejer til h�jre
@@ -618,6 +625,18 @@ void chooseSect() {
 			}
 			turnOnPoint(10, -driveSlow);
 			turnOnPoint(10, -driveSlow);
+
+			clearTimer(T1);
+
+			while (time1[T1] < 5000)
+			{
+		light = getColorReflected(S3);
+		driveLine();
+
+		}
+
+
+			driveSpeed = -15;
       break;
     case 10:
 
@@ -630,8 +649,7 @@ void chooseSect() {
     	waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 
-    	turnOnPoint(80, driveSlow);
-
+    	turnOnPoint(95, driveSlow);
 
 
 			while (getUSDistance(S1) > 7) {
@@ -641,7 +659,9 @@ void chooseSect() {
 			motor[motorL]=0;
 			motor[motorR]=0;
 
-			syncTurn(-70, 210);
+
+
+			syncTurn(-50, 240);
 
 			resetMotorEncoder(motorL);
       resetMotorEncoder(motorR);
@@ -651,8 +671,17 @@ void chooseSect() {
     	waitUntilMotorStop(motorR);
 			waitUntilMotorStop(motorL);
 
-
-
+    	while (getColorReflected(S3) > white - buff) {
+        turnOnPoint(-10, -5);
+        }
+        delay(100);
+        while (getColorReflected(S3) < grey + buff) {
+            	setMotorSyncEncoder(motorL, motorR, 0, 0, -15);
+        }
+        delay(100);
+          turnOnPoint(10, 5);
+          turnOnPoint(10, 5);
+          turnOnPoint(10, 5);
 
       break;
     case 11: // Det modsatte af case 9 hej
@@ -691,36 +720,39 @@ void chooseSect() {
 			{
 				turnOnPoint(10, driveSlow);
 			}
-
+driveSpeed =StdDriveSpeed;
       break;
     case 12:
 
-	    clearTimer(T1);
-			while (getUSDistance(S1) > 10 ) {
+  setMotorSyncEncoder(motorB, motorC, 20, 400, driveSlow);
+ 			waitUntilMotorStop(motorB);
+			while (getColorReflected(S3) > white - buff)
+			{
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+			}
 
-			  oldSect = sect;		//Prevention of repeat sector actions
+			delay(100);
+			while (getColorReflected(S3) < grey + buff)
+			{
+				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
+			}
+			turnOnPoint(30, -driveSlow);
+			//turnOnPoint(10, -driveSlow);
+
+
+
+			while (getUSDistance(S1) > 130 ) {
 			  light = getColorReflected(S3); //Get colour from sensor
-			  test_light++;		//Debug: Counting coloursensor usage
-			  whereIsIt();		//Determine colour
-			  chooseSect();		//Choose sector
-			  printDis();			//Debug: display
-
+			  driveLine();
+				//setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 			}
 
-			while (getUSDistance(S1) > 3) {
-					setMotorSyncEncoder(motorB, motorC, 0, 10, -5);
 
-			}
-			playTone(700, 20); 	//Sector detection tone
-			setMotorSyncEncoder(motorB, motorC, 0, 10, 0);
-			playTone(1200, 20); 	//Sector detection tone
-			moveMotorTarget(motorD, 2000, 100);
-
-			while(1){
-				motor[motorL] = 0;
-				motor[motorR] = 0;
-
-			}
+		while (true)
+		{
+		setMotorSpeed(motorB, 0);
+    setMotorSpeed(motorC, 0);
+		}
 
 			break;
     default:
