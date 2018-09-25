@@ -406,6 +406,25 @@ void chooseSect() {
 		//Lifts bottle
 		grabBottle(1);
 
+		//Passes blue dot
+		resetMotorEncoder(motorL);
+		setMotorSyncEncoder(motorL, motorR, 0, 100, driveSlow);
+
+		//Drive forward until black line
+		while(getColorReflected(S3) > white - buff){
+			setMotorSyncEncoder(motorL, motorR, 0, 0, driveSlow);
+		}
+
+		//Set bottle down behind black line
+		grabBottle(2);
+
+		//Lets go of bottle
+		turnOnPoint(20, driveSlow);
+
+		//Grabs bottle again
+		grabBottle(1);
+
+
 		//Turn counterclock wise 100 degrees
 		turnOnPoint(100, driveSlow);
 		
@@ -417,9 +436,33 @@ void chooseSect() {
 		motor[motorL]=0;
 		motor[motorR]=0;
 
-		
+		//Frees of gray line
+		turnOnPoint(10, -driveSlow);
+
+		//Drives forward until gray
+		while(getColorReflected(S3) > white - buff){
+			motor[motorL]=driveSlow;
+			motor[motorR]=driveSlow;
+		}
+		sleep(100);
+
+		//Drives forward until white
+		while(getColorReflected(S3) < gray + buff){
+			motor[motorL]=driveSlow;
+			motor[motorR]=driveSlow;
+		}
+
+		sleep(100);
+		resetMotorEncoder(motorL);
+		setMotorSyncEncoder(motorL, motorR, 0, 50, -driveSlow);
 
 
+		while(getColorReflected(S3) < gray + buff){
+			motor[motorL]=driveSlow;
+			motor[motorR]=-driveSlow;
+		}
+		motor[motorL]=0;
+		motor[motorR]=0;
 
       break;
     case 4:
