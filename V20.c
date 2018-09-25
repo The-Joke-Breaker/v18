@@ -284,6 +284,8 @@ void syncTurn(int motorRatio, int deg) {
 //x = 1 grabs bottle;
 //x = 2 lets go of bottle
 void grabBottle(int x){
+	motor[motorL] = 0;
+	motor[motorR] = 0;
 	switch(x){
 		case 1:
 			moveMotorTarget(motorG, grabdist, 100);
@@ -388,32 +390,29 @@ void chooseSect() {
 		resetMotorEncoder(motorL);
 
 		//Drives a bit forward after the black line
-		setMotorSyncEncoder(motorL, motorR, 0, 180, driveSlow);
+		setMotorSyncEncoder(motorL, motorR, 0, 250, driveSlow);
 		waitUntilMotorStop(motorL);
 
 
-		//Turns clockwise until over both white and black
-		while (getColorReflected(S3) > white - buff)
-		{
+		turnOnPoint(70, -driveSlow);
+		while(getColorReflected(S3) > white-buff){
 			turnOnPoint(10, -driveSlow);
 		}
-		sleep(100);
-		while (getColorReflected(S3) < grey + buff)
-		{
-			turnOnPoint(10, -driveSlow);
-		}
+		turnOnPoint(30, -driveSlow);
 
-
-		//Follows line until bottle is whitin 4 cm.
-		while(getUSDistance(S1) > 4){
+		integral = 0;
+		//Follows line until bottle is whitin 3 cm.
+		while(getUSDistance(S1) > 3){
+			light = getColorReflected(S3);
 			driveLine();
 		}
+
 		//Lifts bottle
 		grabBottle(1);
 
 		//Passes blue dot
 		resetMotorEncoder(motorL);
-		setMotorSyncEncoder(motorL, motorR, 0, 100, driveSlow);
+		setMotorSyncEncoder(motorL, motorR, -8, 170, driveSlow);
 		waitUntilMotorStop(motorL);
 
 		//Drive forward until black line
@@ -762,15 +761,12 @@ task main() {
   resetMotorEncoder(motorL);
   resetMotorEncoder(motorR);
   while (1) {
-
     oldSect = sect;		//Prevention of repeat sector actions
     light = getColorReflected(S3); //Get colour from sensor
     test_light++;		//Debug: Counting coloursensor usage
     whereIsIt();		//Determine colour
     chooseSect();		//Choose sector
     printDis();			//Debug: display
-
-
   }
 
 
