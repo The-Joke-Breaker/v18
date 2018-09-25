@@ -23,7 +23,7 @@ int grabdist=4000;
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 2; // add for offset start
+	int sect = 6; // add for offset start
 	int oldSect = 0;
 //###############################################
 
