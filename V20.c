@@ -434,17 +434,7 @@ turnOnPoint(200, 5); //turn
       sleep(100);
       moveMotorTarget(motorG, grabdist, 100);
       waitUntilMotorStop(motorG);
-<<<<<<< HEAD
-      //gammel kode (Virkede ofte, fï¿½lsom for vï¿½gt og friktionsï¿½ndring)
-      /*turnOnPoint(-100, -10); //180 grader 320=180
-      waitUntilMotorStop(motorL);
-      waitUntilMotorStop(motorR);*/
-      //gammel slut
-      //test for at forbedre pï¿½lidelighed
-      turnOnPoint(-100, -10); //180 grader 320=180
-=======
       turnOnPoint(-160, -10); //180 grader 320=180
->>>>>>> 158586d11c5ff7fe9b979e76910900e09ef18597
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       int notWhite = 0;
@@ -458,7 +448,7 @@ turnOnPoint(200, 5); //turn
     }
     delay(100);
 
-			while (getColorReflected(S3) < grey + buff) // Mens den er på det grå kører den ligeud.
+			while (getColorReflected(S3) < grey + buff) // Mens den er pï¿½ det grï¿½ kï¿½rer den ligeud.
 			{
 				setMotorSyncEncoder(motorB, motorC, 0, 0, driveSlow);
 		}
