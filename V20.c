@@ -385,90 +385,128 @@ void chooseSect() {
 
       break;
 
-    case 3:
-/*
-		resetMotorEncoder(motorL);
+case 3:
+		sleep(1000);
+		//drej ind
+		while (getColorReflected(S3) < white - buff) {
+			turnOnPoint(10, 5);
+        }
+		turnOnPoint(10, 5);
+		while (getColorReflected(S3) > white - buff) {
+			turnOnPoint(10, 5);
+        }
+        turnOnPoint(10, 5);
+        while (getColorReflected(S3) < white - buff) {
+			turnOnPoint(10, 5);
+        }
+        //drej ind slut
+       
+        //følg linjen
+        driveSpeed =  -15;
+        integral = 0;
+        while (getUSDistance(S1) > 4) {
+        	light = getColorReflected(S3); //Get colour from sensor
+					driveLine();
+        }
+        //følg linjen slut
+        
+        //kør til flaske
+        driveSpeed =  -10;
+        
 
-		//Drives a bit forward after the black line
-		setMotorSyncEncoder(motorL, motorR, 0, 250, driveSlow);
-		waitUntilMotorStop(motorL);
+        syncTurn(0,20);
+    resetMotorEncoder(motorR);
+    resetMotorEncoder(motorL);
+    resetMotorEncoder(motorG);
 
+        playTone(700, 20); 	//Sector detection tone
+    	setMotorSyncEncoder(motorR, motorL, 0, 10, 0);
+    	playTone(1200, 20); 	//Sector detection tone
+        resetMotorEncoder(motorR);
+        resetMotorEncoder(motorL);
+        //kør til flaske slut
+        
+        //grib flaske
+        resetMotorEncoder(motorG);
+    	moveMotorTarget(motorG, grabdist, 100);
+    	waitUntilMotorStop(motorG);
+		//grib flaske slut
+		
+    	sleep(500);
+    	playTone(1200, 20); 	//Sector detection tone
+    	sleep(500);
+		
+		//kør over blå felt
+			resetMotorEncoder(motorL);
+			resetMotorEncoder(motorR);
+    	setMotorSyncEncoder(motorL, motorR, 0, 250, driveSpeed);
 
-		turnOnPoint(70, -driveSlow);
-		while(getColorReflected(S3) > white-buff){
-			turnOnPoint(10, -driveSlow);
-		}
-		turnOnPoint(30, -driveSlow);
+    	waitUntilMotorStop(motorL);
+    	waitUntilMotorStop(motorR);
+    	//kør over blå felt slut
 
-		integral = 0;
-		//Follows line until bottle is whitin 3 cm.
-		while(getUSDistance(S1) > 3){
-			light = getColorReflected(S3);
-			driveLine();
-		}
-
-		//Lifts bottle
-		grabBottle(1);
-
-		//Passes blue dot
-		resetMotorEncoder(motorL);
-		setMotorSyncEncoder(motorL, motorR, -8, 170, driveSlow);
-		waitUntilMotorStop(motorL);
-
-		//Drive forward until black line
-		while(getColorReflected(S3) > white - buff){
-			setMotorSyncEncoder(motorL, motorR, 0, 0, driveSlow);
-		}
-
-		//Set bottle down behind black line
-		grabBottle(2);
-
-		//Lets go of bottle
-		turnOnPoint(20, driveSlow);
-
-		//Grabs bottle again
-		grabBottle(1);
-
-
-		//Turn counterclock wise 100 degrees
-		turnOnPoint(100, driveSlow);
-
-		//Turn counterclock wise until tuching gray
-		while(getColorReflected(S3) > white - buff){
-			motor[motorL]=-driveSlow;
-			motor[motorR]=driveSlow;
-		}
-		motor[motorL]=0;
-		motor[motorR]=0;
-
-		//Frees of gray line
-		turnOnPoint(10, -driveSlow);
-
-		//Drives forward until gray
-		while(getColorReflected(S3) > white - buff){
-			motor[motorL]=driveSlow;
-			motor[motorR]=driveSlow;
-		}
-		sleep(100);
-
-		//Drives forward until white
-		while(getColorReflected(S3) < grey + buff){
-			motor[motorL]=driveSlow;
-			motor[motorR]=driveSlow;
-		}
-
-		sleep(100);
-		resetMotorEncoder(motorL);
-		setMotorSyncEncoder(motorL, motorR, 0, 50, -driveSlow);
+    	sleep(500);
+    	playTone(1200, 20); 	//Sector detection tone
+      sleep(500);
+			//kør over hvidt stykke
+			while (getColorReflected(S3) > white - buff) {
+				setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
+			}
+			//kør over hvidt stykke slut
+	//		sleep(500);
+			playTone(1200, 20); 	//Sector detection tone
+	//		sleep(500);
 
 
-		while(getColorReflected(S3) < grey + buff){
-			motor[motorL]=driveSlow;
-			motor[motorR]=-driveSlow;
-		}
-		motor[motorL]=0;
-		motor[motorR]=0;
-*/
+	  //giv slip på flaske og sammel op igen
+	  waitUntilMotorStop(motorL);
+      waitUntilMotorStop(motorR);
+      moveMotorTarget(motorG, -grabdist, -100);
+      waitUntilMotorStop(motorG);
+      sleep(100);
+      turnOnPoint(20, 10);
+      waitUntilMotorStop(motorL);
+      waitUntilMotorStop(motorR);
+      turnOnPoint(-20, -10);
+      waitUntilMotorStop(motorL);
+      waitUntilMotorStop(motorR);
+      sleep(100);
+      moveMotorTarget(motorG, grabdist, 100);
+      waitUntilMotorStop(motorG);
+      //giv slip på flaske og sammel op igen slut
+      //vend om til linjen
+      waitUntilMotorStop(motorL);
+      waitUntilMotorStop(motorR);
+     while (getColorReflected(S3) < white - buff) {
+        turnOnPoint(-10, -10);
+        }
+        turnOnPoint(-10, -10);
+     while (getColorReflected(S3) > white - buff) {
+        turnOnPoint(-10, -10);
+        }
+     turnOnPoint(-10, -10);
+     //vend om til linjen slut
+     
+     //kør indtil over grå ved t kryds
+      driveSpeed =  -15;
+        integral = 0;
+        while (error < drivespeed+2) {
+        	light = getColorReflected(S3); //Get colour from sensor
+					driveLine();
+        }
+        while (getColorReflected(S3) < white - buff) {
+				setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
+			}
+syncturn(0, 200);
+     //kør indtil over grå ved t kryds slut
+     while (getColorReflected(S3) > white - buff) {
+        turnOnPoint(10, 10);
+        }
+        turnOnPoint(10, 10);
+     while (getColorReflected(S3) < white - buff) {
+        turnOnPoint(10, 10);
+        }
+     integral = 0;
 
       break;
     case 4:
