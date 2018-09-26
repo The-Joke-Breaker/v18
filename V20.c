@@ -282,7 +282,7 @@ void syncTurn(int motorRatio, int deg) {
 
 //Function to grap or let bottle go
 //x = 1 grabs bottle;
-//x = 2 lets go of bottle
+//x = -1 lets go of bottle
 void grabBottle(int x){
 	motor[motorL] = 0;
 	motor[motorR] = 0;
@@ -292,7 +292,7 @@ void grabBottle(int x){
   		waitUntilMotorStop(motorG);
 		break;
 
-		case 2:
+		case -1:
 			moveMotorTarget(motorG, -grabdist, -100);
   		waitUntilMotorStop(motorG);
 		break;
@@ -427,9 +427,7 @@ case 3:
         //kør til flaske slut
         
         //grib flaske
-        resetMotorEncoder(motorG);
-    	moveMotorTarget(motorG, grabdist, 100);
-    	waitUntilMotorStop(motorG);
+        grabBottle(1);
 		//grib flaske slut
 		
     	sleep(500);
@@ -461,8 +459,7 @@ case 3:
 	  //giv slip på flaske og sammel op igen
 	  waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
-      moveMotorTarget(motorG, -grabdist, -100);
-      waitUntilMotorStop(motorG);
+      grabBottle(-1);
       sleep(100);
       turnOnPoint(20, 10);
       waitUntilMotorStop(motorL);
@@ -471,8 +468,7 @@ case 3:
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
       sleep(100);
-      moveMotorTarget(motorG, grabdist, 100);
-      waitUntilMotorStop(motorG);
+      grabBottle(1);
       //giv slip på flaske og sammel op igen slut
       //vend om til linjen
       waitUntilMotorStop(motorL);
@@ -593,8 +589,7 @@ syncturn(0, 200);
     	setMotorSyncTime(motorB, motorC, 0, 2800, driveSlow);
     	waitUntilMotorStop(motorL);
     	waitUntilMotorStop(motorR);
-     moveMotorTarget(motorG, -grabdist, -100);
-      waitUntilMotorStop(motorG);
+      grabBottle(-1);
       sleep(100);
     	while (getColorReflected(S3) > black + buff)
       {
