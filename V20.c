@@ -480,15 +480,17 @@ case 3:
      while (getColorReflected(S3) < grey + buff) {
         turnOnPoint(-10, -10);
         }
-     turnOnPoint(-10, -10);
+        for(int i = 0; i<4; i++)
+        {
+     turnOnPoint(10, 10);
+     }
      //vend om til linjen slut
      
-     //kør indtil over grå ved t kryds
+     //kør indtil over grå
       driveSpeed =  -15;
         integral = 0;
-        while (error < drivespeed+2) {
-        	light = getColorReflected(S3); //Get colour from sensor
-					driveLine();
+        while (getColorReflected(S3) > white - buff) {
+        	setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
         }
         while (getColorReflected(S3) < grey + buff) {
 				setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
@@ -589,7 +591,7 @@ syncturn(0, 200);
     	setMotorSyncTime(motorB, motorC, 0, 2800, driveSlow);
     	waitUntilMotorStop(motorL);
     	waitUntilMotorStop(motorR);
-      grabBottle(-1);
+       grabBottle(-1);
       sleep(100);
     	while (getColorReflected(S3) > black + buff)
       {
