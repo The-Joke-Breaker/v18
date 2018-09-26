@@ -499,6 +499,8 @@ case 3:
 			}
 syncturn(0, 200);
      //kÃ¸r indtil over grÃ¥ ved t kryds slut
+     
+     //drej indtil den er på højre side af linjen
      while (getColorReflected(S3) > white - buff) {
         turnOnPoint(10, 10);
         }
@@ -506,6 +508,7 @@ syncturn(0, 200);
      while (getColorReflected(S3) < white - buff) {
         turnOnPoint(10, 10);
         }
+        //drej indtil den er på højre side af linjen slut
      integral = 0;
 
       break;
