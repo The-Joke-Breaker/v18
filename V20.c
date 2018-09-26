@@ -388,7 +388,7 @@ void chooseSect() {
 case 3:
 		sleep(1000);
 		//drej ind
-		while (getColorReflected(S3) < white - buff) {
+		while (getColorReflected(S3) < grey + buff) {
 			turnOnPoint(10, 5);
         }
 		turnOnPoint(10, 5);
@@ -396,7 +396,7 @@ case 3:
 			turnOnPoint(10, 5);
         }
         turnOnPoint(10, 5);
-        while (getColorReflected(S3) < white - buff) {
+        while (getColorReflected(S3) < grey + buff) {
 			turnOnPoint(10, 5);
         }
         //drej ind slut
@@ -477,11 +477,11 @@ case 3:
       //vend om til linjen
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
-     while (getColorReflected(S3) < white - buff) {
+     while (getColorReflected(S3) > white - buff) {
         turnOnPoint(-10, -10);
         }
         turnOnPoint(-10, -10);
-     while (getColorReflected(S3) > white - buff) {
+     while (getColorReflected(S3) < grey + buff) {
         turnOnPoint(-10, -10);
         }
      turnOnPoint(-10, -10);
@@ -494,7 +494,7 @@ case 3:
         	light = getColorReflected(S3); //Get colour from sensor
 					driveLine();
         }
-        while (getColorReflected(S3) < white - buff) {
+        while (getColorReflected(S3) < grey + buff) {
 				setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
 			}
 syncturn(0, 200);
