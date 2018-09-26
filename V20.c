@@ -11,7 +11,7 @@
 int whitesensor = 0;
 
 //##Grab distance
-int grabdist=4000;
+int grabdist=4500;
 
 //##Test variables
 	int sortcounter = 0; // test
@@ -25,7 +25,7 @@ int grabdist=4000;
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 0; // add for offset start
+	int sect = 2; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -400,21 +400,23 @@ case 3:
 			turnOnPoint(10, 5);
         }
         //drej ind slut
-       
+
         //følg linjen
-        driveSpeed =  -15;
+        driveSpeed =  -20;
         integral = 0;
         while (getUSDistance(S1) > 4) {
         	light = getColorReflected(S3); //Get colour from sensor
 					driveLine();
         }
         //følg linjen slut
-        
+
         //kør til flaske
         driveSpeed =  -10;
-        
 
+				for(int i = 0 ; i < 3; i++)
+				{
         syncTurn(0,20);
+      }
     resetMotorEncoder(motorR);
     resetMotorEncoder(motorL);
     resetMotorEncoder(motorG);
@@ -425,15 +427,15 @@ case 3:
         resetMotorEncoder(motorR);
         resetMotorEncoder(motorL);
         //kør til flaske slut
-        
+
         //grib flaske
         grabBottle(1);
 		//grib flaske slut
-		
+
     	sleep(500);
     	playTone(1200, 20); 	//Sector detection tone
     	sleep(500);
-		
+
 		//kør over blå felt
 			resetMotorEncoder(motorL);
 			resetMotorEncoder(motorR);
@@ -470,22 +472,24 @@ case 3:
       sleep(100);
       grabBottle(1);
       //giv slip på flaske og sammel op igen slut
+
       //vend om til linjen
       waitUntilMotorStop(motorL);
       waitUntilMotorStop(motorR);
-     while (getColorReflected(S3) > white - buff) {
+      for(int i = 0; i<6; i++)
+        {
+     turnOnPoint(-10, -5);
+     }
+     while (getColorReflected(S3) > white - buff || getColorReflected(S3) < black + buff) {
         turnOnPoint(-10, -10);
         }
-        turnOnPoint(-10, -10);
-     while (getColorReflected(S3) < grey + buff) {
-        turnOnPoint(-10, -10);
-        }
-        for(int i = 0; i<4; i++)
+        syncTurn(0, 200);
+        for(int i = 0; i<2; i++)
         {
      turnOnPoint(10, 10);
      }
      //vend om til linjen slut
-     
+
      //kør indtil over grå
       driveSpeed =  -15;
         integral = 0;
@@ -495,9 +499,9 @@ case 3:
         while (getColorReflected(S3) < grey + buff) {
 				setMotorSyncTime(motorL, motorR, 0, 50, driveSpeed);
 			}
-syncturn(0, 200);
-     //kør indtil over grå ved t kryds slut
-     
+syncTurn(0, 200);
+     //kør indtil over gr� slut
+
      //drej indtil den er p� h�jre side af linjen
      while (getColorReflected(S3) > white - buff) {
         turnOnPoint(10, 10);
@@ -508,6 +512,7 @@ syncturn(0, 200);
         }
         //drej indtil den er p� h�jre side af linjen slut
      integral = 0;
+     driveSpeed =  StdDriveSpeed;
 
       break;
     case 4:
