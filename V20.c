@@ -25,7 +25,7 @@ int grabdist=4500;
 	int whereU = 0;
 
 	//Used to track which section the mindstorm is in
-	int sect = 2; // add for offset start
+	int sect = 0; // add for offset start
 	int oldSect = 0;
 //###############################################
 
@@ -330,23 +330,24 @@ void chooseSect() {
     switch (sect) {
     case 1:
 
-     	syncTurn(-20, 200);
+     	syncTurn(-30, 200);
 
-     	sleep(1000);
 
-      /*while (getColorReflected(S3) > white - buff) {
-        setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
-      }*/
+      while (getColorReflected(S3) > white - buff) {
+        setMotorSyncEncoder(motorL, motorR, 0, 0, driveSpeed);
+      }
 
-      do {
-      	printDis();
-      	setMotorSyncEncoder(motorL, motorR, -20, 10, driveSpeed);
-      	waitUntilMotorStop(motorL);
-      	waitUntilMotorStop(motorR);
-      } while (getColorReflected(S3) > white - buff);
+      while (getColorReflected(S3) < grey + buff) {
+        setMotorSyncEncoder(motorL, motorR, 0, 0, driveSpeed);
+      }
+      setMotorSyncEncoder(motorL, motorR, 0, 200, driveSpeed);
+        waitUntilMotorStop(motorL);
+  			waitUntilMotorStop(motorR);
 
-      printDis();
-      sleep(1000);
+       while (getColorReflected(S3) > white - buff) {
+        setMotorSyncEncoder(motorL, motorR, 50, 0, driveSpeed);
+     }
+
 
 
 
@@ -354,35 +355,31 @@ void chooseSect() {
  			//waitUntilMotorStop(motorR);
 
  			//while(1){}
- 			syncTurn(20, 180);
+ //			syncTurn(20, 180);
  			printDis();
-
- 			sleep(1000);
 
     	break;
 
     case 2:
 
-    	sleep(1000);
+         	syncTurn(30, 200);
 
-    	printDis();
-    	syncTurn(20, 200);
 
-    	sleep(1000);
+      while (getColorReflected(S3) > white - buff) {
+        setMotorSyncEncoder(motorL, motorR, 0, 0, driveSpeed);
+      }
 
-    	do {
-    		printDis();
-      	setMotorSyncEncoder(motorL, motorR, 20, -10, driveSpeed);
-      	waitUntilMotorStop(motorL);
-      	waitUntilMotorStop(motorR);
-      } while (getColorReflected(S3) > white - buff);
+      while (getColorReflected(S3) < grey + buff) {
+        setMotorSyncEncoder(motorL, motorR, 0, 0, driveSpeed);
+      }
+      setMotorSyncEncoder(motorL, motorR, 0, 100, driveSpeed);
+        waitUntilMotorStop(motorL);
+  			waitUntilMotorStop(motorR);
 
-      sleep(1000);
-      printDis();
-      syncTurn(-30, 200);
-
-    	sleep(1000);
-
+       while (getColorReflected(S3) > white - buff) {
+        setMotorSyncEncoder(motorL, motorR, -50, 0, driveSpeed);
+     }
+         	syncTurn(-30, -150);
       break;
 
 case 3:
