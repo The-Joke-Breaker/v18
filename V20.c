@@ -160,6 +160,34 @@ while (1){
 }
 }
 
+void changeSect(){
+	int x = 0;
+	while(x == 0){
+		if(getButtonPress(buttonUp) == 1){
+			sect++;
+		}
+		if(getButtonPress(buttonDown) == 1){
+			sect--;
+		}
+		if(getButtonPress(buttonEnter) == 1){
+			x++;
+		}
+
+		sleep(250);
+	}
+
+/*
+buttonNone:	No button (0)
+buttonUp:	Up button (1)
+buttonEnter:	Enter button (2)
+buttonDown:	Down button (3)
+buttonRight:	Right button (4)
+buttonLeft:	Left button (5)
+buttonBack:	Back button (6)
+buttonAny:	Any button (7)*/
+}
+
+
 void clamping() {
 
   //Comtrolles if the motors are saturating
@@ -817,6 +845,8 @@ void reference() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 task main() {
 //	startTask(PlayMario); //startermusik
+	changeSect();
+	sleep(500);
   reference();
   resetMotorEncoder(motorL);
   resetMotorEncoder(motorR);
