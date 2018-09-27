@@ -160,6 +160,49 @@ while (1){
 }
 }
 
+
+void printDis() {
+int afstand = getUSDistance(S1);
+
+  displayBigTextLine(1, "Sect: %i", sect);
+  displayBigTextLine(3, "Lys: %i", getColorReflected(S3));
+  displayBigTextLine(5, "Gray: %i", grey);
+  displayBigTextLine(7, "White: %i", white);
+  displayBigTextLine(9, "Loop: %i", whileloop);
+
+
+}
+
+
+void changeSect(){
+	int x = 0;
+	printDis();
+	while(x == 0){
+		if(getButtonPress(buttonUp) == 1){
+			sect++;
+		}
+		if(getButtonPress(buttonDown) == 1){
+			sect--;
+		}
+		if(getButtonPress(buttonEnter) == 1){
+			x++;
+		}
+
+		sleep(250);
+	}
+
+/*
+buttonNone:	No button (0)
+buttonUp:	Up button (1)
+buttonEnter:	Enter button (2)
+buttonDown:	Down button (3)
+buttonRight:	Right button (4)
+buttonLeft:	Left button (5)
+buttonBack:	Back button (6)
+buttonAny:	Any button (7)*/
+}
+
+
 void clamping() {
 
   //Comtrolles if the motors are saturating
@@ -304,26 +347,7 @@ void grabBottle(int x){
 
 }
 
-void printDis() {
-int afstand = getUSDistance(S1);
 
-  displayBigTextLine(1, "Sect: %i", sect);
-  displayBigTextLine(3, "Lys: %i", getColorReflected(S3));
-  displayBigTextLine(5, "Gray: %i", grey);
-  displayBigTextLine(7, "White: %i", white);
-  displayBigTextLine(9, "Loop: %i", whileloop);
-  //displayBigTextLine(3, "Ultralyd: %i", afstand );
-  //displayBigTextLine(5, "Stadig i l�kken %i", tra );
-  /*##Calibrering af line k?rsel
-  displayBigTextLine(1, "correction: %i", correction);
-  displayBigTextLine(3, "e:%f", e);
-  displayBigTextLine(5, "i:%f", i);
-  displayBigTextLine(7, "d:%f", d);
-  displayBigTextLine(9, "l:%i", light);
-  displayBigTextLine(11, "L:%i", motor[motorL]);
-  displayBigTextLine(13, "R:%i", motor[motorR]);*/
-
-}
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 void chooseSect() {
   if (sect != oldSect) {
@@ -814,6 +838,8 @@ void reference() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 task main() {
 //	startTask(PlayMario); //startermusik
+	changeSect();
+	sleep(500);
   reference();
   resetMotorEncoder(motorL);
   resetMotorEncoder(motorR);
