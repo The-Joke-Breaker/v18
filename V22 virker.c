@@ -291,7 +291,7 @@ void whereIsIt() {
     //Black area
     sortcounter++;
     whitesensor = 0;
-    if (sortcounter >= 20) {
+    if (sortcounter >= 15) {
       sect++;
     	playTone(440, 20); 	//Sector detection tone
       motor[motorR] = driveSpeed;
@@ -392,7 +392,7 @@ void chooseSect() {
   			waitUntilMotorStop(motorR);
 
        while (getColorReflected(S3) > white - buff) {
-        setMotorSyncEncoder(motorL, motorR, 50, 0, driveSpeed);
+        setMotorSyncEncoder(motorL, motorR, 50, 0, driveSlow);
      }
 
 
@@ -424,7 +424,7 @@ void chooseSect() {
   			waitUntilMotorStop(motorR);
 
        while (getColorReflected(S3) > white - buff) {
-        setMotorSyncEncoder(motorL, motorR, -50, 0, driveSpeed);
+        setMotorSyncEncoder(motorL, motorR, -50, 0, driveSlow);
      }
          	syncTurn(-30, -150);
       break;
@@ -452,7 +452,7 @@ resetMotorEncoder(motorR);
         //drej ind slut
 
         //følg linjen
-        driveSpeed =  -15;
+        driveSpeed =  -13;
         integral = 0;
         while (getUSDistance(S1) > 4) {
         	light = getColorReflected(S3); //Get colour from sensor
@@ -605,12 +605,12 @@ syncTurn(0, 200);
     driveSpeed = driveSlow;
  //   turnOnPoint(10, driveSlow);
 
-   	setMotorSyncEncoder(motorB, motorC, 0, 100, driveSlow);
+   	setMotorSyncEncoder(motorB, motorC, 10, 100, driveSlow);
    	waitUntilMotorStop(motorR);
 		waitUntilMotorStop(motorL);
 
 
-  	setMotorSyncEncoder(motorB, motorC, 5, 1000, driveSpeed);
+  	setMotorSyncEncoder(motorB, motorC, 5, 1000, -40);
 		waitUntilMotorStop(motorR);
 		waitUntilMotorStop(motorL);
 				while (getColorReflected(S3) > white - buff)
@@ -633,47 +633,25 @@ syncTurn(0, 200);
 	}
 
 		clearTimer(T1);
-		driveSpeed = -18;
+		driveSpeed = driveSlow;
 
-		while (time1[T1] < 3000)
+		while (time1[T1] < 4000)
 		{
 				light = getColorReflected(S3);
 	drivemodsatLine();
 	}
-	    driveSpeed = driveSpeed;
+	    driveSpeed = -15;
 			clearTimer(T1);
-/*
-			while (time1[T1] < 7000)
-		{
-	light = getColorReflected(S3);
-	drivemodsatLine();
-	}
-    driveSpeed = -15;
-
-*/
+	integral = 0;
 resetBumpedValue(S2);
 int bump = 0;
 //		while(case5sensor == 0 || getColorReflected(S3) > black + buff )
 while (bump == 0)
 {
 		light = getColorReflected(S3);
-	drivemodsatLine();
-	 if (light > grey - buff && light < grey + buff) {
-    //grey area
-    whitesensor = 0; // Bruges til case 7
-  } else if (light > white - buff) {
-    //White area
-    whitesensor++;
-  } else if (light < black + buff && whereU != 1) {
-    //Black area
-    whitesensor = 0;
-}
-bump = getBumpedValue(S2);
-if (whitesensor > 1500)
-{
-	case5sensor = 1;
-	//driveSpeed = -15;
-}
+		drivemodsatLine();
+		bump = getBumpedValue(S2);
+
 
 }
 playTone(440, 20);
@@ -696,6 +674,8 @@ while (getColorReflected(S3) > black - buff )
 	light = getColorReflected(S3);
 	drivemodsatLine();
 }
+delay(50);
+playTone(440, 20);
 sect++;
 chooseSect();
       break;
@@ -808,6 +788,7 @@ driveSpeed = StdDriveSpeed;
 
         driveSpeed = StdDriveSpeed;
    	    grabBottle(2);
+   	   integral = 0;
 
       break;
     case 9:
@@ -978,6 +959,8 @@ void reference() {
     turnOnPoint(30, -10);
 
   }
+ 	turnOnPoint(10,-10);
+ 	delay(100);
   white = getColorReflected(S3);
 
   while (getColorReflected(S3) > white - buff) {
@@ -995,7 +978,7 @@ void reference() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 task main() {
 //	startTask(PlayMario); //startermusik
-//	changeSect();
+	changeSect();
 	sleep(500);
   reference();
   resetMotorEncoder(motorL);
