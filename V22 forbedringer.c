@@ -112,16 +112,23 @@ int grabdist=4500;
 
 	task PlayMario(){
 	setSoundVolume(100);
-	string Mortendone;
+	string M1;
+	string M2;
+	string M3;
+	string M4;
 
+//while (1){
 
-while (1){
+for (int tal = 1; tal < 34; tal++)
+{
+	sprintf(M1,"/home/root/");
+	sprintf(M2,"lms2012/prjs/");
+	sprintf(M3,"rc-data/Morten");
+	sprintf(M4, "%i", tal);
 
-//for (int tal = 1; tal < 34; tal++)
-//{
-//	sprintf(Mortendone,"/home/root/lms2012/prjs/rc-data/Morten%i", tal);
-//playSoundFile(Mortendone); //Robot --> LEGO Brick --> File Managment Utility
-//}
+playSoundFile("M1+M2+M3+M4"); //Robot --> LEGO Brick --> File Managment Utility
+}
+/*
 	//	playSoundFile("/home/root/lms2012/prjs/rc-data/Morten1"); //Robot --> LEGO Brick --> File Managment Utility
 			playSoundFile("/home/root/lms2012/prjs/rc-data/Morten2"); //Robot --> LEGO Brick --> File Managment Utility
 				playSoundFile("/home/root/lms2012/prjs/rc-data/Morten3"); //Robot --> LEGO Brick --> File Managment Utility
@@ -159,6 +166,7 @@ while (1){
 
 
 }
+*/
 }
 
 
@@ -640,7 +648,7 @@ syncTurn(0, 200);
 				light = getColorReflected(S3);
 	drivemodsatLine();
 	}
-	    driveSpeed = driveSpeed;
+	    driveSpeed = -45;
 			clearTimer(T1);
 /*
 			while (time1[T1] < 7000)
@@ -691,7 +699,7 @@ integral = 0;
 	}
 driveSpeed = -15;
 
-while (getColorReflected(S3) > black - buff )
+while (getColorReflected(S3) > black + buff )
 {
 	light = getColorReflected(S3);
 	drivemodsatLine();
@@ -770,7 +778,7 @@ driveSpeed = StdDriveSpeed;
       break;
     case 8:
     			driveSpeed = StdDriveSpeed;
-			turnOnPoint(8, -10);
+	//		turnOnPoint(8, -10);
     	setMotorSyncTime(motorB, motorC, 0, 2550, driveSlow);
     	waitUntilMotorStop(motorL);
     	waitUntilMotorStop(motorR);
@@ -788,7 +796,7 @@ driveSpeed = StdDriveSpeed;
 
         driveSpeed = -20;
 
-       	while (whitesensor < 650 && getColorReflected(S3) > black)
+       	while (whitesensor < 400 && getColorReflected(S3) > black)
        {
 			  oldSect = sect;		//Prevention of repeat sector actions
 			  light = getColorReflected(S3); //Get colour from sensor
@@ -978,6 +986,8 @@ void reference() {
     turnOnPoint(30, -10);
 
   }
+      turnOnPoint(30, -10);
+      delay(100);
   white = getColorReflected(S3);
 
   while (getColorReflected(S3) > white - buff) {
